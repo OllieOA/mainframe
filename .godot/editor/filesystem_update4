@@ -1,7 +1,14 @@
 res://default_env.tres
 res://game_logic/game_scene.tscn
-res://game_logic/game_scene.gd
-res://game_logic/puzzle_node.gd
 res://game_logic/network/puzzle_node.tscn
 res://game_logic/network/network.tscn
 res://game_logic/network/network.gd
+res://game_logic/puzzle_node.gd
+res://game_logic/minigames/base_minigame/base_minigame.tscn
+res://game_logic/minigames/base_minigame/base_minigame.gd
+res://game_logic/minigames/utils/color_utils.gd
+res://game_logic/minigames/utils/color_text_utils.gd
+res://game_logic/minigames/utils/world_utils.gd
+res://game_logic/minigames/base_minigame/minigame_container.tscn
+res://game_logic/minigames/base_minigame/minigame_container.gd
+res://game_logic/minigames/base_minigame/minigame_theme.tres

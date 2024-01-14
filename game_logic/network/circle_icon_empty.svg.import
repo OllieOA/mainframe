@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjx4r5bef4h8y"
-path="res://.godot/imported/puzzle_node_active.svg-cae62dea34bc8e86de7cd7100afee121.ctex"
+uid="uid://d0kyje2iyg6dp"
+path="res://.godot/imported/circle_icon_empty.svg-aec903273ee44e04b1591a7a0ed5eb67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://game_logic/network/puzzle_node_active.svg"
-dest_files=["res://.godot/imported/puzzle_node_active.svg-cae62dea34bc8e86de7cd7100afee121.ctex"]
+source_file="res://game_logic/network/circle_icon_empty.svg"
+dest_files=["res://.godot/imported/circle_icon_empty.svg-aec903273ee44e04b1591a7a0ed5eb67.ctex"]
 
 [params]
 

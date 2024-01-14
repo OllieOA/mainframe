@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="WordUtils" load_steps=2 format=3 uid="uid://cmm1thx3mn888"]
+
+[ext_resource type="Script" path="res://game_logic/minigames/utils/world_utils.gd" id="1_gace2"]
+
+[resource]
+script = ExtResource("1_gace2")

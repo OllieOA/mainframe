@@ -1,11 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dok2h5016hktp"]
+[gd_scene load_steps=2 format=3 uid="uid://dok2h5016hktp"]
 
 [ext_resource type="Script" path="res://game_logic/puzzle_node.gd" id="1_7b8pu"]
-[ext_resource type="Texture2D" uid="uid://baq25wdlv2of3" path="res://game_logic/network/puzzle_node.svg" id="2_82ccm"]
 
 [node name="PuzzleNode" type="Node2D"]
 script = ExtResource("1_7b8pu")
 
 [node name="PuzzleSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-texture = ExtResource("2_82ccm")

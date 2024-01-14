@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxpylkmrnaqdi"]
+
+[ext_resource type="Script" path="res://game_logic/minigames/base_minigame/minigame_container.gd" id="1_pdl51"]
+[ext_resource type="Texture2D" uid="uid://3b406xupt1c2" path="res://game_logic/minigames/base_minigame/minigame_icon_base.svg" id="2_12j5o"]
+
+[node name="LeftMiddle" type="MarginContainer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -175.0
+offset_right = 300.0
+offset_bottom = 175.0
+grow_vertical = 2
+script = ExtResource("1_pdl51")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_12j5o")
+stretch_mode = 3

@@ -1,7 +1,7 @@
 class_name Network
 extends Node2D
 
-const HEX_RADIUS = 300
+const HEX_RADIUS = 320
 const PUZZLE_NODE = preload("res://game_logic/network/puzzle_node.tscn")
 
 var active_node = 0
@@ -35,7 +35,7 @@ func _get_lines() -> PackedVector2Array:
 	for base_node in all_connected_nodes:
 		if node_lookup[base_node].node_enabled:
 			connection_points.append(node_lookup[base_node].global_position)
-	
+
 	connection_points.append(connection_points[0])
 	return connection_points
 
@@ -59,6 +59,7 @@ func _populate_network() -> void:
 		new_node.global_position = point
 		new_node.node_base_coord = point
 		node_lookup[curr_idx] = new_node
+		new_node.set_icon_type(curr_idx % 3)
 		curr_idx += 1
 
 
@@ -92,6 +93,8 @@ func _try_move(event: InputEvent) -> void:
 			_move_to_node(each_node, backup_node)
 		
 		node_option += 1
+	
+	node_lookup[0].disable_node()
 
 
 func _unhandled_input(event: InputEvent) -> void:
