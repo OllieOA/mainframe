@@ -1,2 +1,0 @@
-WordUtils
-ColorTextUtils
