@@ -23,8 +23,8 @@ GameControl="*res://globals/game_control.tscn"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 
 [importer_defaults]

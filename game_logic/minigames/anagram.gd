@@ -1,7 +1,7 @@
 class_name Anagram extends Minigame
 
-@onready var anagram_prompt: RichTextLabel = $AnagramContainer/AnagramPrompt
-@onready var anagram_response: RichTextLabel = $AnagramContainer/AnagramResponse
+@onready var anagram_prompt: RichTextLabel = %AnagramPrompt
+@onready var anagram_response: RichTextLabel = %AnagramResponse
 
 var correct_word: String = ""
 var jumbled_word: String = ""
@@ -22,9 +22,6 @@ func _ready() -> void:
 
 	anagram_prompt.parse_bbcode("  " + bbcode_jumbled_word)
 	anagram_response.text = "> " + player_str
-
-	print(correct_word)
-	print(jumbled_word)
 
 	start_minigame()
 

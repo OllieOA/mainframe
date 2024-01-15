@@ -19,6 +19,7 @@ func generate_all() -> void:
 	rng.randomize()
 	_generate_word_list()
 	_generate_alphabet()
+	print(valid_scancodes)
 
 
 func _generate_word_list() -> void:
@@ -40,7 +41,7 @@ func _generate_alphabet() -> void:
 		alphabet.append(OS.get_keycode_string(each_scancode))
 
 	# Set other scancodes
-	valid_scancodes = alpha_scancodes
+	valid_scancodes = alpha_scancodes.duplicate()
 	valid_scancodes += special_scancodes
 
 

@@ -13,20 +13,20 @@ color = Color(0.0745098, 0.933333, 1, 1)
 grow_begin = 0.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cpm5b"]
-texture = ExtResource("1_povyg")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 7.0
-region_rect = Rect2(7, 7, 349, 348)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qsoja"]
 texture = ExtResource("2_iljne")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 region_rect = Rect2(11, 11, 220, 220)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qsoja"]
+texture = ExtResource("1_povyg")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(7, 7, 349, 349)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wgag3"]
 texture = ExtResource("3_jpfhs")

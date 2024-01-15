@@ -1,0 +1,4 @@
+res://default_env.tres
+res://game_logic/minigames/base_minigame/minigame.tscn
+res://game_logic/minigames/base_minigame/minigame_theme.tres
+res://game_logic/minigames/base_minigame/minigame.gd

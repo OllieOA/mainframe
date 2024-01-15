@@ -1,10 +1,12 @@
-class_name Network
-extends Node2D
+class_name Network extends Node2D
 
-const HEX_RADIUS = 320
+signal network_node_activated(activated_node_id: int)
+signal network_node_deactivated(deactivated_node_id: int)
+
+const HEX_RADIUS = 450
 const PUZZLE_NODE = preload("res://game_logic/network/puzzle_node.tscn")
 
-var active_node = 0
+var active_node = -1
 
 var node_lookup: Dictionary = {}
 var all_connected_nodes: Dictionary = {}
@@ -14,7 +16,6 @@ var polyline_spec: PackedVector2Array
 
 func _ready() -> void:
 	_populate_network()
-	node_lookup[active_node].activate_node()
 	
 	for i in range(6):
 		all_connected_nodes[i] = [wrap(i - 1, 0, 6), wrap(i + 1, 0, 6)]
@@ -43,12 +44,13 @@ func _get_lines() -> PackedVector2Array:
 func _populate_network() -> void:
 	var base_screen_transform = DisplayServer.window_get_size()
 	var screen_center = Vector2i(base_screen_transform.x / 2, base_screen_transform.y / 2)
+	var screen_offset = Vector2i(0, -100)
 	
 	var curr_angle: float = 0.0
 	var hex_points: Array = []
 	
 	for _i in range(6):
-		var new_point = Vector2i(int(HEX_RADIUS * cos(curr_angle)), int(HEX_RADIUS * sin(curr_angle))) + screen_center
+		var new_point = Vector2i(int(HEX_RADIUS * cos(curr_angle)), int(HEX_RADIUS * sin(curr_angle))) + screen_center + screen_offset
 		hex_points.append(new_point)
 		curr_angle += 60 * PI/180
 	
@@ -68,9 +70,16 @@ func _move_to_node(new_node: int, backup_node: int) -> void:
 	if not node_lookup[new_node].node_enabled:
 		move_to = backup_node
 	
+	if move_to == active_node:
+		return
+	
 	node_lookup[active_node].deactivate_node()
+	emit_signal("network_node_deactivated", active_node)
+	GameControl.emit_signal("deactivated_minigame", active_node)
 	node_lookup[move_to].activate_node()
 	active_node = move_to
+	emit_signal("network_node_activated", active_node)
+	GameControl.emit_signal("activated_minigame", active_node)
 
 
 func _try_move(event: InputEvent) -> void:
@@ -91,9 +100,15 @@ func _try_move(event: InputEvent) -> void:
 			_move_to_node(each_node, backup_node)
 		elif event.is_action_pressed("move_down") and vert_diff > 0:
 			_move_to_node(each_node, backup_node)
-		
+
 		node_option += 1
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if active_node == -1:
+		node_lookup[0].activate_node()
+		active_node = 0
+		emit_signal("network_node_activated", active_node)
+		GameControl.emit_signal("activated_minigame", active_node)
+		return
 	_try_move(event)

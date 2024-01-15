@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bma5d8atvru2"]
+[gd_scene load_steps=3 format=3 uid="uid://bma5d8atvru2"]
 
 [ext_resource type="Script" path="res://game_logic/game_scene.gd" id="1_cmye7"]
 [ext_resource type="PackedScene" uid="uid://cpq5muosc6rqg" path="res://game_logic/network/network.tscn" id="2_rhchi"]
-[ext_resource type="PackedScene" uid="uid://cakgbvloua2ll" path="res://game_logic/minigames/base_minigame/minigame_constructor.tscn" id="3_6vsl3"]
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_cmye7")
@@ -10,5 +9,4 @@ script = ExtResource("1_cmye7")
 [node name="Network" parent="." instance=ExtResource("2_rhchi")]
 
 [node name="Minigames" type="CanvasLayer" parent="."]
-
-[node name="MinigameConstructor" parent="Minigames" instance=ExtResource("3_6vsl3")]
+unique_name_in_owner = true

@@ -5,25 +5,43 @@
 [ext_resource type="Theme" uid="uid://c501q1j77skrq" path="res://game_logic/minigames/base_minigame/minigame_theme.tres" id="2_a0o5d"]
 
 [node name="Anagram" instance=ExtResource("1_rk6v6")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("2_a0o5d")
 script = ExtResource("2_20bkg")
 
-[node name="AnagramContainer" type="VBoxContainer" parent="." index="2"]
+[node name="MinigameMargins" parent="." index="2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnagramContainer" type="VBoxContainer" parent="MinigameMargins" index="0"]
 layout_mode = 2
 
-[node name="AnagramPrompt" type="RichTextLabel" parent="AnagramContainer" index="0"]
+[node name="AnagramPrompt" type="RichTextLabel" parent="MinigameMargins/AnagramContainer" index="0"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "Prompt"
+fit_content = true
 shortcut_keys_enabled = false
 
-[node name="HSeparator" type="HSeparator" parent="AnagramContainer" index="1"]
+[node name="HSeparator" type="HSeparator" parent="MinigameMargins/AnagramContainer" index="1"]
 layout_mode = 2
 
-[node name="AnagramResponse" type="RichTextLabel" parent="AnagramContainer" index="2"]
+[node name="AnagramResponse" type="RichTextLabel" parent="MinigameMargins/AnagramContainer" index="2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "Response"
+fit_content = true
 shortcut_keys_enabled = false

@@ -23,6 +23,8 @@ func _ready() -> void:
 	connect("activated_minigame", _handle_minigame_activated)
 	connect("deactivated_minigame", _handle_minigame_deactivated)
 	connect("completed_minigame", _handle_minigame_completed)
+	
+	
 
 
 func _handle_minigame_activated(activated_minigame_id: int) -> void:
