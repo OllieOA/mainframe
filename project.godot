@@ -10,16 +10,16 @@ config_version=5
 
 [application]
 
-config/name="Mainframe"
+config/name="TypeHeist"
 run/main_scene="res://game_logic/game_scene.tscn"
 config/features=PackedStringArray("4.2")
 boot_splash/show_image=false
-boot_splash/image="res://ui/gremlindevelopment_splash_screen.png"
 
 [autoload]
 
 AudioManager="*res://globals/audio_manager.tscn"
 SignalBus="*res://globals/signal_bus.gd"
+GameControl="*res://globals/game_control.tscn"
 
 [display]
 

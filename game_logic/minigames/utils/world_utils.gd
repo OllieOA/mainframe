@@ -1,6 +1,6 @@
 class_name WordUtils extends Resource
 
-const word_list_path = "res://utils/wordlist.json"
+const word_list_path = "res://game_logic/minigames/utils/wordlist.json"
 
 var word_list: Array
 var valid_scancodes: Array
@@ -42,5 +42,17 @@ func _generate_alphabet() -> void:
 	# Set other scancodes
 	valid_scancodes = alpha_scancodes
 	valid_scancodes += special_scancodes
+
+
+func get_random_words(target_num_words: int, min_word_length: int, max_word_length: int) -> Array:
+	if len(word_list) == 0:
+		generate_all()
+
+	var strings = []
+
+	while len(strings) < target_num_words:
+		var rand_choice = word_list[rng.randi() % word_list.size()]
+		if not rand_choice in strings and len(rand_choice) <= max_word_length and len(rand_choice) >= min_word_length:
+			strings.append(rand_choice)
 	
-	print(alpha_scancodes)
+	return strings

@@ -1,7 +1,10 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c501q1j77skrq"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://c501q1j77skrq"]
 
 [ext_resource type="Texture2D" uid="uid://3b406xupt1c2" path="res://game_logic/minigames/base_minigame/minigame_icon_base.svg" id="1_povyg"]
 [ext_resource type="Texture2D" uid="uid://8ukulra7jbcj" path="res://game_logic/minigames/base_minigame/minigame_prompt_base.svg" id="2_iljne"]
+[ext_resource type="FontFile" uid="uid://w0hsa2bjntxx" path="res://theme/fonts/RobotoMono-VariableFont_wght.ttf" id="3_fik0x"]
+[ext_resource type="Texture2D" uid="uid://bhe6my6g850r0" path="res://game_logic/minigames/base_minigame/autohack_progress.svg" id="3_jpfhs"]
+[ext_resource type="Texture2D" uid="uid://dbiyg3aoboafl" path="res://game_logic/minigames/base_minigame/autohack_progress_solid.svg" id="4_qo8nm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c2nvw"]
 
@@ -25,8 +28,31 @@ texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 region_rect = Rect2(11, 11, 220, 220)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wgag3"]
+texture = ExtResource("3_jpfhs")
+texture_margin_left = 11.0
+texture_margin_top = 11.0
+texture_margin_right = 11.0
+texture_margin_bottom = 11.0
+region_rect = Rect2(2, 2, 56, 117)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r1qe4"]
+texture = ExtResource("4_qo8nm")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(3, 3, 54, 115)
+
 [resource]
+default_font = ExtResource("3_fik0x")
 Button/styles/disabled = SubResource("StyleBoxTexture_c2nvw")
 HSeparator/styles/separator = SubResource("StyleBoxLine_xwmek")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
 Panel/styles/panel = SubResource("StyleBoxTexture_cpm5b")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_qsoja")
+ProgressBar/styles/background = SubResource("StyleBoxTexture_wgag3")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_r1qe4")

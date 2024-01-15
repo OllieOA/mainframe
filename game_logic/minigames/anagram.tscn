@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cif8xnt8a746c"]
+
+[ext_resource type="PackedScene" uid="uid://cwva2be5l0yso" path="res://game_logic/minigames/base_minigame/minigame.tscn" id="1_rk6v6"]
+[ext_resource type="Script" path="res://game_logic/minigames/anagram.gd" id="2_20bkg"]
+[ext_resource type="Theme" uid="uid://c501q1j77skrq" path="res://game_logic/minigames/base_minigame/minigame_theme.tres" id="2_a0o5d"]
+
+[node name="Anagram" instance=ExtResource("1_rk6v6")]
+theme = ExtResource("2_a0o5d")
+script = ExtResource("2_20bkg")
+
+[node name="AnagramContainer" type="VBoxContainer" parent="." index="2"]
+layout_mode = 2
+
+[node name="AnagramPrompt" type="RichTextLabel" parent="AnagramContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Prompt"
+shortcut_keys_enabled = false
+
+[node name="HSeparator" type="HSeparator" parent="AnagramContainer" index="1"]
+layout_mode = 2
+
+[node name="AnagramResponse" type="RichTextLabel" parent="AnagramContainer" index="2"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "Response"
+shortcut_keys_enabled = false

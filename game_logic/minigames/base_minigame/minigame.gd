@@ -1,47 +1,37 @@
-class_name BaseMinigame extends Panel
+class_name Minigame extends PanelContainer
 
-signal minigame_complete(score)
-signal player_str_updated(key_not_valid)
-
+signal minigame_started()
+signal minigame_completed()
 signal good_key()
 signal bad_key()
+
+@export var word_utils: WordUtils
+@export var color_text_utils: ColorTextUtils
 
 @onready var good_type_sound: AudioStreamPlayer = $GoodTypeSound
 @onready var bad_type_sound: AudioStreamPlayer = $BadTypeSound
 
-enum MinigameType {
-	ANAGRAM,  # Find the anagram of a word with some letters pre-filled
-	KEYBOARD_HOLD,  # Hold all the keys at the same time
-	KEYBOARD_TOGGLE,  # Set all buttons with short letter sequences to on
-	CAPITALS,  # Type the capitalised letters
-	PROMPT,  # Type the three prompted words in order
-	GRID,  # Find the word in a 4x4 grid
-	LONGEST,  # Type the longest word
-	SHORTEST,  # Type the shortest word
-}
+var minigame_data = MinigameData.new()
+var minigame_id: int = -1
 
-var minigame_active: bool = false
 var keys_pressed: Dictionary = {}
 var can_backspace: bool = true
 var must_hold: bool= false
 
 var player_str: String = ""
 
-var word_utils = preload("res://game_logic/minigames/utils/word_utils.tres")
-var color_text_utils = preload("res://game_logic/minigames/utils/color_text_utils.tres")
-
 var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
 	rng.randomize()
-	connect("player_str_updated", _handle_player_str_updated)
-	connect("bad_key", _play_bad_key)
-	connect("good_key", _play_good_key)
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not minigame_active:
+	if not GameControl.minigame_active:
+		return
+	
+	if not GameControl.active_minigame_id != minigame_id:
 		return
 	
 	if event.is_action_pressed("backspace_word") and can_backspace:
@@ -63,7 +53,16 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func start_minigame() -> void:
-	minigame_active = true
+	emit_signal("minigame_started")
+
+
+func finish_minigame() -> void:
+	emit_signal("minigame_completed")
+	queue_free()  # TODO: Replace with animation
+
+
+func _handle_player_str_updated(key_not_valid) -> void:
+	pass  # TO BE OVERLOADED
 
 
 func _play_good_key() -> void:
@@ -73,7 +72,3 @@ func _play_good_key() -> void:
 
 func _play_bad_key() -> void:
 	bad_type_sound.play()
-
-
-func _handle_player_str_updated(key_not_valid) -> void:
-	pass  # TO BE OVERLOADED

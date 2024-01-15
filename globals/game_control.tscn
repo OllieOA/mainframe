@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bep50u6iwgxjo"]
+
+[ext_resource type="Script" path="res://globals/game_control.gd" id="1_a782w"]
+
+[node name="GameControl" type="Node2D"]
+script = ExtResource("1_a782w")
+
+[node name="AutohackTimer" type="Timer" parent="."]

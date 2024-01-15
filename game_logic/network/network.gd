@@ -93,8 +93,6 @@ func _try_move(event: InputEvent) -> void:
 			_move_to_node(each_node, backup_node)
 		
 		node_option += 1
-	
-	node_lookup[0].disable_node()
 
 
 func _unhandled_input(event: InputEvent) -> void:

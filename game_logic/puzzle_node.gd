@@ -77,7 +77,6 @@ func _jiggle() -> void:
 
 
 func set_icon_type(requested_icon: int) -> void:
-	print(requested_icon)
 	icon_type = icon_type_map[requested_icon]
 	deactivate_node()
 
