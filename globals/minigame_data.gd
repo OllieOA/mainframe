@@ -1,4 +1,4 @@
-class_name MinigameData extends Resource
+extends Node
 
 enum MinigameType {
 	ANAGRAM,  # Find the anagram of a word with some letters pre-filled

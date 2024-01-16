@@ -1,6 +1,6 @@
-class_name WordUtils extends Resource
+extends Node
 
-const word_list_path = "res://game_logic/minigames/utils/wordlist.json"
+const word_list_path = "res://globals/wordlist.json"
 
 var word_list: Array
 var valid_scancodes: Array
@@ -19,7 +19,6 @@ func generate_all() -> void:
 	rng.randomize()
 	_generate_word_list()
 	_generate_alphabet()
-	print(valid_scancodes)
 
 
 func _generate_word_list() -> void:

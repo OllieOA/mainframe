@@ -2,6 +2,8 @@ class_name GameScene extends Node2D
 
 @onready var network: Network = $Network
 @onready var minigames: CanvasLayer = %Minigames
+@onready var surveillance_bars: CanvasLayer = $SurveillanceBars
+
 
 const MINIGAME_CONSTRUCTOR_SCENE = preload("res://game_logic/minigames/base_minigame/minigame_constructor.tscn")
 

@@ -5,6 +5,10 @@ signal autohack_triggered()
 signal activated_minigame(activated_minigame_id: int)
 signal deactivated_minigame(deactivated_minigame_id: int)
 signal completed_minigame(completed_minigame_id: int)
+signal player_str_updated(key_valid: bool, minigame_id: int)
+
+signal surveillance_activated()
+signal escape_activated()
 
 var autohack_time: float = 4.0
 var autohack_time_increase: float = 0.5
@@ -12,6 +16,9 @@ var autohack_available: bool = false
 
 var minigame_active: bool = false
 var active_minigame_id: int = -1
+
+var surveillance_active: bool = false
+var escape_active: bool = false
 
 @onready var autohack_timer: Timer = $AutohackTimer
 
@@ -24,7 +31,8 @@ func _ready() -> void:
 	connect("deactivated_minigame", _handle_minigame_deactivated)
 	connect("completed_minigame", _handle_minigame_completed)
 	
-	
+	connect("surveillance_activated", _handle_surveillance_activated)
+	connect("escape_activated", _handle_escape_activated)
 
 
 func _handle_minigame_activated(activated_minigame_id: int) -> void:
@@ -47,3 +55,11 @@ func _handle_autohack_timeout() -> void:
 	autohack_timer.wait_time = autohack_time
 	emit_signal("autohack_made_available")
 
+
+func _handle_surveillance_activated() -> void:
+	surveillance_active = true
+
+
+func _handle_escape_activated() -> void:
+	surveillance_active = false
+	escape_active = true

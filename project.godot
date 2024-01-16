@@ -20,6 +20,9 @@ boot_splash/show_image=false
 AudioManager="*res://globals/audio_manager.tscn"
 SignalBus="*res://globals/signal_bus.gd"
 GameControl="*res://globals/game_control.tscn"
+ColorTextUtils="*res://globals/color_text_utils.gd"
+WordUtils="*res://globals/word_utils.gd"
+MinigameData="*res://globals/minigame_data.gd"
 
 [display]
 
@@ -88,6 +91,10 @@ backspace_word={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194308,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_navigation/layer_1="HeistNavigation"
 
 [physics]
 

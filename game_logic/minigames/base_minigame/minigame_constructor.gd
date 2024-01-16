@@ -1,9 +1,5 @@
 class_name BaseMinigame extends Control
 
-signal minigame_activated(minigam_id: int)
-signal minigame_complete(score)
-signal player_str_updated(key_not_valid: bool)
-
 @export var minigame_type: MinigameData.MinigameType
 
 @onready var auto_hack_activate_sound: AudioStreamPlayer = %AutoHackActivateSound
@@ -36,8 +32,10 @@ func create_minigame(val: MinigameData.MinigameType) -> void:
 	new_minigame.minigame_id = minigame_id
 	prompt_text.text = MinigameData.PROMPTS_TEXT[val]
 	minigame_container.add_child(new_minigame)
-	
-	new_minigame.connect("minigame_completed", _handle_minigame_completed)
+
+
+func kill_minigame() -> void:
+	queue_free()
 
 
 func deactivate_minigame() -> void:
@@ -58,7 +56,3 @@ func _handle_autohack_made_available() -> void:
 func _handle_autohack_used() -> void:
 	if not auto_hack.disabled:
 		auto_hack.disabled = true
-
-
-func _handle_minigame_completed() -> void:
-	GameControl.emit_signal("minigame_complete", minigame_id)

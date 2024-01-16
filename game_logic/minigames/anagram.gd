@@ -7,7 +7,8 @@ var correct_word: String = ""
 var jumbled_word: String = ""
 
 func _ready() -> void:
-	correct_word = word_utils.get_random_words(1, 4, 6)[0]
+	super._ready()
+	correct_word = WordUtils.get_random_words(1, 4, 6)[0]
 	jumbled_word = correct_word
 	
 	while not _jumbled_okay():
@@ -16,14 +17,12 @@ func _ready() -> void:
 	var bbcode_jumbled_word = ""
 	for idx in range(len(jumbled_word)):
 		if jumbled_word[idx] == correct_word[idx]:
-			bbcode_jumbled_word += color_text_utils.set_bbcode_color_string(jumbled_word[idx], color_text_utils.correct_position_color)
+			bbcode_jumbled_word += ColorTextUtils.set_bbcode_color_string(jumbled_word[idx], ColorTextUtils.correct_position_color)
 		else:
-			bbcode_jumbled_word += color_text_utils.set_bbcode_color_string(jumbled_word[idx], color_text_utils.neutral_color)
+			bbcode_jumbled_word += ColorTextUtils.set_bbcode_color_string(jumbled_word[idx], ColorTextUtils.neutral_color)
 
 	anagram_prompt.parse_bbcode("  " + bbcode_jumbled_word)
 	anagram_response.text = "> " + player_str
-
-	start_minigame()
 
 
 func jumble(input_str: String) -> String:
@@ -54,19 +53,23 @@ func _jumbled_okay() -> bool:
 	return false
 
 
-func _handle_player_str_updated(key_not_valid: bool) -> void:
+func _handle_player_str_updated(key_not_valid: bool, updated_minigame_id: int) -> void:
+	if updated_minigame_id != minigame_id:
+		return
+	
 	if len(player_str) > len(correct_word):
-		emit_signal("bad_key")
+		emit_signal("bad_key", minigame_id)
+		player_str = player_str.substr(0, len(player_str) - 1)
 		return
 
 	anagram_response.text = "> " + player_str
-	emit_signal("good_key")
+	emit_signal("good_key", minigame_id)
 
 	# Detect the win
 	if player_str == correct_word:
 		finish_minigame()
 
 
-func _handle_minigame_complete() -> void:
-	var bbcode_player_str = color_text_utils.set_bbcode_color_string(player_str, color_text_utils.correct_position_color)
+func _handle_minigame_complete(_completed_minigame_id: int) -> void:
+	var bbcode_player_str = ColorTextUtils.set_bbcode_color_string(player_str, ColorTextUtils.correct_position_color)
 	anagram_response.parse_bbcode("> " + bbcode_player_str)

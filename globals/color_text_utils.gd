@@ -1,4 +1,4 @@
-class_name ColorTextUtils extends Resource
+extends Node
 
 @export var correct_position_color: Color = Color("#639765")
 @export var incorrect_position_color: Color = Color("#a65455")
