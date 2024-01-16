@@ -1,12 +1,10 @@
 res://default_env.tres
-res://game_logic/minigames/anagram.tscn
 res://game_logic/minigames/base_minigame/minigame_theme.tres
+res://game_logic/minigames/capitals.tscn
+res://game_logic/minigames/capitals.gd
+res://globals/minigame_data.gd
 res://game_logic/game_scene.tscn
-res://game_logic/minigames/base_minigame/minigame.gd
-res://globals/game_control.gd
-res://game_logic/minigames/anagram.gd
-res://game_logic/minigames/base_minigame/minigame.tscn
-res://game_logic/minigames/base_minigame/minigame_constructor.gd
 res://game_logic/game_scene.gd
+res://game_logic/minigames/anagram.tscn
+res://game_logic/minigames/base_minigame/minigame.tscn
 res://game_logic/heist/base_heist.tscn
-res://game_logic/heist/heist_data.gd

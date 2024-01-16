@@ -27,6 +27,7 @@ func _ready() -> void:
 		var new_minigame: Node = MINIGAME_CONSTRUCTOR_SCENE.instantiate()
 		
 		new_minigame.minigame_id = idx
+		new_minigame.minigame_type = MinigameData.MinigameType.CAPITALS
 		minigames.add_child(new_minigame)
 		new_minigame.deactivate_minigame()
 		new_minigame.global_position = minigame_spawn_location

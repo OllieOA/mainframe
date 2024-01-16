@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5d3jn37vahhf"]
+
+[ext_resource type="PackedScene" uid="uid://cwva2be5l0yso" path="res://game_logic/minigames/base_minigame/minigame.tscn" id="1_aa5uv"]
+[ext_resource type="Script" path="res://game_logic/minigames/capitals.gd" id="2_bvljy"]
+
+[node name="Capitals" instance=ExtResource("1_aa5uv")]
+script = ExtResource("2_bvljy")
+
+[node name="CapitalsPrompt" type="RichTextLabel" parent="MinigameMargins" index="0"]
+layout_mode = 2

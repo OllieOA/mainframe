@@ -12,9 +12,11 @@ enum MinigameType {
 }
 
 const PROMPTS_TEXT = {
-	MinigameType.ANAGRAM: "Unscramble this!"
+	MinigameType.ANAGRAM: "Unscramble this!",
+	MinigameType.CAPITALS: "Find the word!"
 }
 
 const MINIGAME_LOOKUP = {
-	MinigameType.ANAGRAM: preload("res://game_logic/minigames/anagram.tscn")
+	MinigameType.ANAGRAM: preload("res://game_logic/minigames/anagram.tscn"),
+	MinigameType.CAPITALS: preload("res://game_logic/minigames/capitals.tscn")
 }
