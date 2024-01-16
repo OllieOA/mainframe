@@ -21,15 +21,20 @@ func _ready() -> void:
 	while len(noise_string) < TEXTBOX_SIZE:
 		noise_string += WordUtils.alphabet[rng.randi() % len(WordUtils.alphabet)].to_lower()
 	
+	print("noise_string:" + noise_string)
+	
 	while len(insert_indices) < len(correct_word):
 		var rand_index = rng.randi_range(5, TEXTBOX_SIZE - 1)
 		if not rand_index in insert_indices:
 			insert_indices.append(rand_index)
 
 	insert_indices.sort()
+	print("inserting "+ str(insert_indices))
 	
 	for idx in range(len(correct_word)):
 		noise_string[insert_indices[idx]] = correct_word[idx]
+	
+	# TODO FIX THIS STALL
 	
 	# Insert newlines
 	var broken_lines = []
@@ -37,6 +42,8 @@ func _ready() -> void:
 		var removed_string = noise_string.left(LINE_WIDTH)
 		broken_lines.append(removed_string + "\n")
 		noise_string.erase(0, LINE_WIDTH)
+
+	print("broken lines: " + str(broken_lines))
 
 	for line in broken_lines:
 		noise_string += line
