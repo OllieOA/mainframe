@@ -61,13 +61,32 @@ func _handle_player_str_updated(key_not_valid: bool, updated_minigame_id: int) -
 		emit_signal("bad_key", minigame_id)
 		player_str = player_str.substr(0, len(player_str) - 1)
 		return
+	
 
-	anagram_response.text = "> " + player_str
-	emit_signal("good_key", minigame_id)
-
+	var bbcode_player_str = "> "
+	var idx = 0
+	var next_color: Color
+	for each_char in player_str:
+		next_color = ColorTextUtils.incorrect_position_color
+		if each_char == correct_word[idx]:
+			next_color = ColorTextUtils.correct_position_color
+		bbcode_player_str += ColorTextUtils.set_bbcode_color_string(each_char, next_color)
+		idx += 1
+	
+	anagram_response.parse_bbcode(bbcode_player_str)
 	# Detect the win
+	
 	if player_str == correct_word:
 		finish_minigame()
+	
+	if len(player_str) == 0:
+		return
+	if player_str[-1] == correct_word[len(player_str) - 1]:
+		emit_signal("good_key", minigame_id)
+	else:
+		emit_signal("bad_key", minigame_id)
+
+
 
 
 func _handle_minigame_complete(_completed_minigame_id: int) -> void:
