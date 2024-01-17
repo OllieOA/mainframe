@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://be0kr2cjmmfhc"]
+
+[ext_resource type="PackedScene" uid="uid://cwva2be5l0yso" path="res://game_logic/minigames/base_minigame/minigame.tscn" id="1_glrf4"]
+[ext_resource type="Script" path="res://game_logic/minigames/hold_keys.gd" id="2_irtxx"]
+
+[node name="HoldKeys" instance=ExtResource("1_glrf4")]
+script = ExtResource("2_irtxx")
+
+[node name="HoldKeysPrompt" type="RichTextLabel" parent="MinigameMargins" index="0"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

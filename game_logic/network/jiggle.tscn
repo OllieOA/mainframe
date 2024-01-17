@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwf2equvg687u"]
+
+[ext_resource type="Script" path="res://game_logic/network/jiggle.gd" id="1_sdtiy"]
+
+[node name="Jiggle" type="Node2D"]
+script = ExtResource("1_sdtiy")

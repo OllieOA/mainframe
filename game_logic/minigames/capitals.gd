@@ -13,6 +13,7 @@ var curr_index: int = 0
 var insert_indices: Array = []
 
 func _ready() -> void:
+	super._ready()
 	rng.randomize()
 	correct_word = WordUtils.get_random_words(1, 6, 8)[0]
 	can_backspace = false
@@ -21,29 +22,23 @@ func _ready() -> void:
 	while len(noise_string) < TEXTBOX_SIZE:
 		noise_string += WordUtils.alphabet[rng.randi() % len(WordUtils.alphabet)].to_lower()
 	
-	print("noise_string:" + noise_string)
-	
 	while len(insert_indices) < len(correct_word):
 		var rand_index = rng.randi_range(5, TEXTBOX_SIZE - 1)
 		if not rand_index in insert_indices:
 			insert_indices.append(rand_index)
 
 	insert_indices.sort()
-	print("inserting "+ str(insert_indices))
 	
 	for idx in range(len(correct_word)):
 		noise_string[insert_indices[idx]] = correct_word[idx]
-	
-	# TODO FIX THIS STALL
 	
 	# Insert newlines
 	var broken_lines = []
 	while len(noise_string) > 0:
 		var removed_string = noise_string.left(LINE_WIDTH)
 		broken_lines.append(removed_string + "\n")
-		noise_string.erase(0, LINE_WIDTH)
+		noise_string = noise_string.substr(LINE_WIDTH, -1)
 
-	print("broken lines: " + str(broken_lines))
 
 	for line in broken_lines:
 		noise_string += line
@@ -84,13 +79,13 @@ func _handle_player_str_updated(key_not_valid: bool, updated_minigame_id: int) -
 	var correct_key = correct_word[curr_index]
 
 	if key_not_valid:
-		emit_signal("bad_key")
+		emit_signal("bad_key", minigame_id)
 	elif player_str[-1] != correct_key:
 		player_str = player_str.substr(0, len(player_str) - 1)
-		emit_signal("bad_key")
+		emit_signal("bad_key", minigame_id)
 	else:
 		curr_index += 1
-		emit_signal("good_key")
+		emit_signal("good_key", minigame_id)
 
 	# Update color
 	var full_bbcode_str = _build_bbcode_capitals()

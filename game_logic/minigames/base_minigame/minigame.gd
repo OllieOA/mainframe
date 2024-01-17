@@ -12,7 +12,7 @@ var keys_pressed: Dictionary
 var can_backspace: bool = true
 var must_hold: bool = false
 
-var player_str: String = ""
+var player_str: String
 
 var rng = RandomNumberGenerator.new()
 
@@ -24,10 +24,11 @@ func _ready() -> void:
 	GameControl.connect("completed_minigame", _handle_minigame_complete)
 	connect("good_key", _play_good_key)
 	connect("bad_key", _play_bad_key)
-	call_deferred("_populate_keys_pressed")
+	call_deferred("_create_game")
 
 
-func _populate_keys_pressed() -> void:
+func _create_game() -> void:
+	player_str = ""
 	keys_pressed = {}
 	for each_scancode in WordUtils.valid_scancodes:
 		keys_pressed[each_scancode] = false

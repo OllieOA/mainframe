@@ -56,3 +56,25 @@ func get_random_words(target_num_words: int, min_word_length: int, max_word_leng
 			strings.append(rand_choice)
 	
 	return strings
+
+
+func get_random_letters(target_num_letters: int) -> Array:
+	assert(target_num_letters <= 25, "Too many letters selected!")
+	
+	if len(alphabet) == 0:
+		generate_all()
+
+	var mutator_alphabet = alphabet.duplicate()
+	mutator_alphabet.shuffle()
+	return mutator_alphabet.slice(0, target_num_letters)
+
+
+func get_random_keycodes(target_num_keycodes: int) -> Array:
+	assert(target_num_keycodes <= 25, "Too many keycodes selected!")
+	
+	if len(alpha_scancodes) == 0:
+		generate_all()
+
+	var mutator_scancodes: Array = alpha_scancodes.duplicate()
+	mutator_scancodes.shuffle()
+	return mutator_scancodes.slice(0, target_num_keycodes)

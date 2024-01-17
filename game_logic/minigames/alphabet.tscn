@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://3rnfvjnnoq85"]
+
+[ext_resource type="PackedScene" uid="uid://cwva2be5l0yso" path="res://game_logic/minigames/base_minigame/minigame.tscn" id="1_3lbr7"]
+[ext_resource type="Script" path="res://game_logic/minigames/alphabet.gd" id="2_cnre7"]
+
+[node name="Alphabet" instance=ExtResource("1_3lbr7")]
+script = ExtResource("2_cnre7")
+
+[node name="AlphabetPrompt" type="RichTextLabel" parent="MinigameMargins" index="0"]
+clip_contents = false
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 38
+bbcode_enabled = true
+text = "Prompt"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

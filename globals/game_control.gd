@@ -5,6 +5,8 @@ signal autohack_triggered()
 signal activated_minigame(activated_minigame_id: int)
 signal deactivated_minigame(deactivated_minigame_id: int)
 signal completed_minigame(completed_minigame_id: int)
+signal destroyed_minigame(destroyed_minigame_id: int)
+signal spawned_minigame(spawned_minigame_id: int)
 signal player_str_updated(key_valid: bool, minigame_id: int)
 
 signal surveillance_activated()
@@ -30,6 +32,7 @@ func _ready() -> void:
 	connect("activated_minigame", _handle_minigame_activated)
 	connect("deactivated_minigame", _handle_minigame_deactivated)
 	connect("completed_minigame", _handle_minigame_completed)
+	connect("destroyed_minigame", _handle_minigame_destroyed)
 	
 	connect("surveillance_activated", _handle_surveillance_activated)
 	connect("escape_activated", _handle_escape_activated)
@@ -48,6 +51,10 @@ func _handle_minigame_deactivated(deactivated_minigame_id: int) -> void:
 func _handle_minigame_completed(completed_minigame_id: int) -> void:
 	minigame_active = false
 	active_minigame_id = -1
+
+
+func _handle_minigame_destroyed(destroyed_minigame_id: int) -> void:
+	pass
 
 
 func _handle_autohack_timeout() -> void:

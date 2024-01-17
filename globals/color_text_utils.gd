@@ -5,7 +5,7 @@ extends Node
 @export var active_position_color: Color = Color("#4682b4")
 @export var neutral_color: Color = Color("#acacac")
 @export var neutral_color_dark: Color = Color("#121212")
-@export var inactive_color: Color = Color("#444444")
+@export var inactive_color: Color = Color("#666666")
 
 func set_bbcode_color_string(string: String, color: Color) -> String:
 	# False for no alpha

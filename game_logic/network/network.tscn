@@ -1,6 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpq5muosc6rqg"]
+[gd_scene load_steps=4 format=3 uid="uid://cpq5muosc6rqg"]
 
 [ext_resource type="Script" path="res://game_logic/network/network.gd" id="1_h53we"]
+[ext_resource type="AudioStream" uid="uid://br248t6x1luyp" path="res://game_logic/minigames/utils/good_type_sound.ogg" id="2_vk50m"]
+[ext_resource type="AudioStream" uid="uid://h0p471a34mgv" path="res://game_logic/minigames/utils/bad_type_sound.ogg" id="3_2oybn"]
 
 [node name="Network" type="Node2D"]
 script = ExtResource("1_h53we")
+
+[node name="MoveAllowed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_vk50m")
+volume_db = -8.0
+
+[node name="MoveDenied" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2oybn")
+volume_db = -8.0
