@@ -1,0 +1,114 @@
+[gd_scene load_steps=8 format=3 uid="uid://5xbyuedvcd7f"]
+
+[ext_resource type="Texture2D" uid="uid://bswbkrrcefyx3" path="res://game_logic/heist/surveillance/circle_surveillance_icon.svg" id="1_leuml"]
+[ext_resource type="FontFile" uid="uid://w0hsa2bjntxx" path="res://theme/fonts/RobotoMono-VariableFont_wght.ttf" id="1_ogvt5"]
+[ext_resource type="Texture2D" uid="uid://3e1amqln3dnj" path="res://ui/common_theme/progress_background.svg" id="2_6ng13"]
+[ext_resource type="Texture2D" uid="uid://nk1x4monv01u" path="res://ui/common_theme/progress_texture.svg" id="3_fmohd"]
+[ext_resource type="Texture2D" uid="uid://cglkqo86abphw" path="res://game_logic/heist/surveillance/square_surveillance_icon.svg" id="4_74eyg"]
+[ext_resource type="Texture2D" uid="uid://cxkl43gahn5mf" path="res://game_logic/heist/surveillance/diamond_surveillance_icon.svg" id="5_07hpv"]
+
+[sub_resource type="Theme" id="Theme_wjajw"]
+default_font = ExtResource("1_ogvt5")
+
+[node name="SurveillanceLevels" type="MarginContainer"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_wjajw")
+theme_override_constants/margin_bottom = 20
+
+[node name="OuterContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="SurveillanceBars" type="VBoxContainer" parent="OuterContainer"]
+layout_mode = 2
+
+[node name="SurveillanceTitle" type="Label" parent="OuterContainer/SurveillanceBars"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Suspicion Level"
+
+[node name="CircleSurveillance" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+
+[node name="CircleSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/CircleSurveillance"]
+layout_mode = 2
+texture = ExtResource("1_leuml")
+
+[node name="CircleSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/CircleSurveillance"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+step = 0.5
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 10
+stretch_margin_top = 10
+stretch_margin_right = 10
+stretch_margin_bottom = 10
+texture_under = ExtResource("2_6ng13")
+texture_progress = ExtResource("3_fmohd")
+
+[node name="SquareSurveillance" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+
+[node name="SquareSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/SquareSurveillance"]
+layout_mode = 2
+texture = ExtResource("4_74eyg")
+
+[node name="SquareSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/SquareSurveillance"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+step = 0.5
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 10
+stretch_margin_top = 10
+stretch_margin_right = 10
+stretch_margin_bottom = 10
+texture_under = ExtResource("2_6ng13")
+texture_progress = ExtResource("3_fmohd")
+
+[node name="DiamondSurveillance" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+modulate = Color(0, 0, 0.803922, 1)
+layout_mode = 2
+
+[node name="DiamondSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/DiamondSurveillance"]
+layout_mode = 2
+texture = ExtResource("5_07hpv")
+
+[node name="DiamondSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/DiamondSurveillance"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+step = 0.5
+value = 50.0
+nine_patch_stretch = true
+stretch_margin_left = 10
+stretch_margin_top = 10
+stretch_margin_right = 10
+stretch_margin_bottom = 10
+texture_under = ExtResource("2_6ng13")
+texture_progress = ExtResource("3_fmohd")
+
+[node name="VSeparator" type="VSeparator" parent="OuterContainer"]
+layout_mode = 2
+
+[node name="OverloadBar" type="VBoxContainer" parent="OuterContainer"]
+layout_mode = 2
+
+[node name="OverloadTitle" type="Label" parent="OuterContainer/OverloadBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Overload Status"
+
+[node name="OverloadLevel" type="TextureProgressBar" parent="OuterContainer/OverloadBar"]
+unique_name_in_owner = true
+layout_mode = 2

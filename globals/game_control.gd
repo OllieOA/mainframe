@@ -16,6 +16,12 @@ var autohack_time: float = 4.0
 var autohack_time_increase: float = 0.5
 var autohack_available: bool = false
 
+var red_detection_level: float = 0.0
+var green_detection_level: float = 0.0
+var blue_detection_level: float = 0.0
+
+var detection_rate: float = 1.0
+
 var minigame_active: bool = false
 var active_minigame_id: int = -1
 

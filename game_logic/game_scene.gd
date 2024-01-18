@@ -40,6 +40,11 @@ func _spawn_minigame(minigame_id: int, minigame_spawn_location: Vector2i) -> voi
 	minigames.add_child(new_minigame)
 	
 	new_minigame.create_minigame(minigame_choice)
+	#new_minigame.create_minigame(MinigameData.MinigameType.ANAGRAM)
+	#new_minigame.create_minigame(MinigameData.MinigameType.ALPHABET)
+	#new_minigame.create_minigame(MinigameData.MinigameType.CAPITALS)
+	#new_minigame.create_minigame(MinigameData.MinigameType.HOLD_KEYS)
+	#new_minigame.create_minigame(MinigameData.MinigameType.HACK)
 	new_minigame.deactivate_minigame()
 	new_minigame.global_position = minigame_spawn_location
 	new_minigame.minigame_base_location = minigame_spawn_location

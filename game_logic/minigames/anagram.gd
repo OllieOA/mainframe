@@ -74,7 +74,6 @@ func _handle_player_str_updated(key_not_valid: bool, updated_minigame_id: int) -
 		idx += 1
 	
 	anagram_response.parse_bbcode(bbcode_player_str)
-	# Detect the win
 	
 	if player_str == correct_word:
 		finish_minigame()

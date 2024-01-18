@@ -1,13 +1,16 @@
 class_name HoldKeys extends Minigame
 
-@onready var hold_keys_prompt: RichTextLabel = $MinigameMargins/HoldKeysPrompt
+@onready var hold_keys_top_row: RichTextLabel = %HoldKeysTopRow
+@onready var hold_keys_bottom_row: RichTextLabel = %HoldKeysBottomRow
+@onready var dont_hold_keys: RichTextLabel = %DontHoldKeys
 
 var hold_required: Array
+
 var keys_held: Dictionary
 
 func _ready() -> void:
 	super._ready()
-	hold_required = WordUtils.get_random_keycodes(rng.randi_range(6, 8))
+	hold_required = WordUtils.get_random_keycodes(6)
 	call_deferred("_setup_keys_held")
 	call_deferred("_show_bbcode_keys_held")
 
@@ -18,8 +21,9 @@ func _setup_keys_held() -> void:
 
 func _show_bbcode_keys_held() -> bool:
 	var all_held = true
-	var bbcode_string: String = ""
 	var idx: int = 0
+	var bbcode_string: String = ""
+	var bbcode_strs: Array = []
 	for held_key in hold_required:
 		idx += 1
 		var next_key_str = " " + OS.get_keycode_string(held_key) + " "
@@ -30,10 +34,26 @@ func _show_bbcode_keys_held() -> bool:
 			all_held = false
 		
 		if idx % 3 == 0 and idx > 0:
-			bbcode_string += "\n"
+			bbcode_strs.append(bbcode_string)
+			bbcode_string = ""
+
+	var bad_bbcode: String = " "
+	var next_bad_key: String
+	var bad_keys_num: int = 0
+	for key_code in WordUtils.alpha_scancodes:
+		if keys_held[key_code] and not key_code in hold_required:
+			next_bad_key = OS.get_keycode_string(key_code)
+			bad_bbcode += ColorTextUtils.set_bbcode_color_string(next_bad_key, ColorTextUtils.incorrect_position_color)
+			bad_keys_num += 1
+			if bad_keys_num >= 7:
+				break
 	
-	hold_keys_prompt.parse_bbcode(bbcode_string)
-	print(all_held)
+	hold_keys_top_row.parse_bbcode(bbcode_strs[0])
+	hold_keys_bottom_row.parse_bbcode(bbcode_strs[1])
+	
+	dont_hold_keys.parse_bbcode(bad_bbcode)
+	
+	all_held = all_held and bad_keys_num == 0
 	return all_held
 
 

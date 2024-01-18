@@ -2,7 +2,6 @@ class_name Alphabet extends Minigame
 
 @onready var alphabet_prompt: RichTextLabel = $MinigameMargins/AlphabetPrompt
 
-
 var correct_word := ""
 var curr_index := 0
 
@@ -13,6 +12,10 @@ const LINEBREAKS = [
 
 func _ready() -> void:
 	super._ready()
+	can_backspace = false
+	call_deferred("_populate_alphabet")
+
+func _populate_alphabet() -> void:
 	for character in WordUtils.alphabet:
 		correct_word += character
 

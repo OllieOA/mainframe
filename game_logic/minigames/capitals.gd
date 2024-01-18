@@ -2,7 +2,6 @@ class_name Capitals extends Minigame
 
 @onready var capitals_prompt: RichTextLabel = $MinigameMargins/CapitalsPrompt
 
-
 const TEXTBOX_SIZE = 56
 const LINE_WIDTH = 14
 
@@ -38,7 +37,6 @@ func _ready() -> void:
 		var removed_string = noise_string.left(LINE_WIDTH)
 		broken_lines.append(removed_string + "\n")
 		noise_string = noise_string.substr(LINE_WIDTH, -1)
-
 
 	for line in broken_lines:
 		noise_string += line

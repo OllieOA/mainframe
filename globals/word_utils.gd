@@ -15,6 +15,10 @@ const SPECIAL_LOOKUP = {
 var rng = RandomNumberGenerator.new()
 
 
+func _ready() -> void:
+	generate_all()
+
+
 func generate_all() -> void:
 	rng.randomize()
 	_generate_word_list()
