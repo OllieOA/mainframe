@@ -33,6 +33,8 @@ func disable_jiggle() -> void:
 
 func reset_position() -> void:
 	disable_jiggle()
+	if pos_tween == null:
+		return
 	pos_tween.stop()
 	reset_tween = get_tree().create_tween()
 	reset_tween.tween_property(node_to_jiggle, "global_position", node_base_coord, 0.1).set_ease(Tween.EASE_IN)

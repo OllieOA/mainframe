@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0gn0cdqiw0me"
-path="res://.godot/imported/gremlindevelopment_splash_screen.png-2cc8dff12a2e64aa8d454a1a184a79ae.ctex"
+uid="uid://d37xopclb7nui"
+path="res://.godot/imported/surveillance_camera.svg-fad32b1bd8dd9f5e7e353dd8308fb3db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/gremlindevelopment_splash_screen.png"
-dest_files=["res://.godot/imported/gremlindevelopment_splash_screen.png-2cc8dff12a2e64aa8d454a1a184a79ae.ctex"]
+source_file="res://game_logic/heist/surveillance/surveillance_camera.svg"
+dest_files=["res://.godot/imported/surveillance_camera.svg-fad32b1bd8dd9f5e7e353dd8308fb3db.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=0.8
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

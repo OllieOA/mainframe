@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2x4q2cuc081f"]
+
+[ext_resource type="Texture2D" uid="uid://tkfcrorp2jkl" path="res://game_logic/heist/heistmate_sprite.svg" id="1_qntc8"]
+[ext_resource type="Texture2D" uid="uid://cfaqc2e40p035" path="res://game_logic/heist/radial_texture.svg" id="2_lqt4k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tddk7"]
+radius = 8.0
+
+[node name="HeistMate" type="CharacterBody2D"]
+collision_layer = 2
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+max_value = 1.0
+step = 0.01
+value = 0.25
+fill_mode = 5
+texture_progress = ExtResource("2_lqt4k")
+
+[node name="HeistMateIcon" type="Sprite2D" parent="."]
+texture = ExtResource("1_qntc8")
+
+[node name="HeistCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tddk7")

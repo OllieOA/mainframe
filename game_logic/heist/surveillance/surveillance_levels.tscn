@@ -1,14 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://5xbyuedvcd7f"]
+[gd_scene load_steps=7 format=3 uid="uid://5xbyuedvcd7f"]
 
 [ext_resource type="Texture2D" uid="uid://bswbkrrcefyx3" path="res://game_logic/heist/surveillance/circle_surveillance_icon.svg" id="1_leuml"]
-[ext_resource type="FontFile" uid="uid://w0hsa2bjntxx" path="res://theme/fonts/RobotoMono-VariableFont_wght.ttf" id="1_ogvt5"]
+[ext_resource type="Theme" uid="uid://c501q1j77skrq" path="res://game_logic/minigames/base_minigame/minigame_theme.tres" id="1_wypgy"]
 [ext_resource type="Texture2D" uid="uid://3e1amqln3dnj" path="res://ui/common_theme/progress_background.svg" id="2_6ng13"]
 [ext_resource type="Texture2D" uid="uid://nk1x4monv01u" path="res://ui/common_theme/progress_texture.svg" id="3_fmohd"]
 [ext_resource type="Texture2D" uid="uid://cglkqo86abphw" path="res://game_logic/heist/surveillance/square_surveillance_icon.svg" id="4_74eyg"]
 [ext_resource type="Texture2D" uid="uid://cxkl43gahn5mf" path="res://game_logic/heist/surveillance/diamond_surveillance_icon.svg" id="5_07hpv"]
-
-[sub_resource type="Theme" id="Theme_wjajw"]
-default_font = ExtResource("1_ogvt5")
 
 [node name="SurveillanceLevels" type="MarginContainer"]
 anchors_preset = 12
@@ -17,7 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
-theme = SubResource("Theme_wjajw")
+theme = ExtResource("1_wypgy")
 theme_override_constants/margin_bottom = 20
 
 [node name="OuterContainer" type="HBoxContainer" parent="."]
@@ -107,8 +104,9 @@ layout_mode = 2
 [node name="OverloadTitle" type="Label" parent="OuterContainer/OverloadBar"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Overload Status"
+text = "Overload"
 
 [node name="OverloadLevel" type="TextureProgressBar" parent="OuterContainer/OverloadBar"]
 unique_name_in_owner = true
 layout_mode = 2
+texture_over = ExtResource("3_fmohd")

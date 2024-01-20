@@ -1,5 +1,4 @@
-class_name PuzzleNode
-extends Node2D
+class_name PuzzleNode extends Node2D
 
 @onready var puzzle_sprite: Sprite2D = %PuzzleSprite
 

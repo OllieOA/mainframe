@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://c501q1j77skrq"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://c501q1j77skrq"]
 
 [ext_resource type="Texture2D" uid="uid://3b406xupt1c2" path="res://game_logic/minigames/base_minigame/minigame_icon_base.svg" id="1_povyg"]
 [ext_resource type="Texture2D" uid="uid://8ukulra7jbcj" path="res://game_logic/minigames/base_minigame/minigame_prompt_base.svg" id="2_iljne"]
@@ -44,6 +44,10 @@ texture_margin_right = 7.0
 texture_margin_bottom = 7.0
 region_rect = Rect2(3, 3, 54, 115)
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_vh32x"]
+color = Color(0.0745098, 0.933333, 1, 1)
+vertical = true
+
 [resource]
 default_font = ExtResource("3_fik0x")
 Button/styles/disabled = SubResource("StyleBoxTexture_c2nvw")
@@ -56,3 +60,4 @@ Panel/styles/panel = SubResource("StyleBoxTexture_cpm5b")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_qsoja")
 ProgressBar/styles/background = SubResource("StyleBoxTexture_wgag3")
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_r1qe4")
+VSeparator/styles/separator = SubResource("StyleBoxLine_vh32x")

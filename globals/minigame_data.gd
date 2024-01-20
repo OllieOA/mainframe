@@ -6,11 +6,14 @@ enum MinigameType {
 	HOLD_KEYS,  # Hold all the keys at the same time
 	CAPITALS,  # Type the capitalised letters
 	HACK,  # Mash keys to hack
-	#KEYBOARD_TOGGLE,  # Set all buttons with short letter sequences to on
 	#PROMPT,  # Type the three prompted words in order
-	#GRID,  # Find the word in a 4x4 grid
+	#WORDSEARCH,  # Find the word in a 4x4 grid
 	#LONGEST,  # Type the longest word
 	#SHORTEST,  # Type the shortest word
+	#ACRONYM,  # Type the acronym of the words
+	#FORTUNE,  # Guess the letters
+	#VOWELS,  # Type only the vowels
+	#CONSONANTS,  # Type only the consonants
 }
 
 const PROMPTS_TEXT = {
