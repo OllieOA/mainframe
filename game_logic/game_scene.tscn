@@ -18,4 +18,4 @@ unique_name_in_owner = true
 [node name="SurveillanceLevels" parent="SurveillanceBars" instance=ExtResource("3_1a3rm")]
 
 [node name="BaseHeist" parent="." instance=ExtResource("3_v745p")]
-position = Vector2(962, 421)
+position = Vector2(962, 489)

@@ -3,7 +3,8 @@ class_name Network extends Node2D
 signal network_node_activated(activated_node_id: int)
 signal network_node_deactivated(deactivated_node_id: int)
 
-const HEX_RADIUS = 450
+const HEX_RADIUS = 475
+const SCREEN_OFFSET = Vector2i(0, -70)
 const PUZZLE_NODE = preload("res://game_logic/network/puzzle_node.tscn")
 
 @onready var move_allowed: AudioStreamPlayer = $MoveAllowed
@@ -70,13 +71,12 @@ func _get_lines() -> PackedVector2Array:
 func _populate_network() -> void:
 	var base_screen_transform = DisplayServer.window_get_size()
 	var screen_center = Vector2i(base_screen_transform.x / 2, base_screen_transform.y / 2)
-	var screen_offset = Vector2i(0, -100)
 	
 	var curr_angle: float = 0.0
 	var hex_points: Array = []
 	
 	for _i in range(6):
-		var new_point = Vector2i(int(HEX_RADIUS * cos(curr_angle)), int(HEX_RADIUS * sin(curr_angle))) + screen_center + screen_offset
+		var new_point = Vector2i(int(HEX_RADIUS * cos(curr_angle)), int(HEX_RADIUS * sin(curr_angle))) + screen_center + SCREEN_OFFSET
 		hex_points.append(new_point)
 		curr_angle += 60 * PI/180
 	

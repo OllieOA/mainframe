@@ -9,16 +9,14 @@ radius = 8.0
 
 [node name="HeistMate" type="CharacterBody2D"]
 collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_4apvk")
 
-[node name="ProgressBar" type="TextureProgressBar" parent="."]
+[node name="ActionProgress" type="TextureProgressBar" parent="."]
 offset_left = -15.0
 offset_top = -15.0
 offset_right = 15.0
 offset_bottom = 15.0
-max_value = 1.0
-step = 0.01
-value = 0.25
 fill_mode = 5
 texture_progress = ExtResource("2_lqt4k")
 
@@ -27,3 +25,5 @@ texture = ExtResource("1_qntc8")
 
 [node name="HeistCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_tddk7")
+
+[node name="HeistNav" type="NavigationAgent2D" parent="."]

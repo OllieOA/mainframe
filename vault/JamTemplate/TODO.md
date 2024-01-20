@@ -4,13 +4,13 @@
 	- [x] Make raycasts
 	- [x] Make polygon
 - [ ] Create heist-mates
-	- [ ] Make texture bar
-	- [ ] Make navigation
+	- [x] Make texture bar
+	- [x] Make navigation
 	- [ ] Add inventory
+- [ ] Add heist return logic
 - [ ] Create objects to steal
-- [ ] Create locks
 - [ ] Create heist sequence (just navigation?)
-- [ ] Link surveillance bars to camera
+- [x] Link surveillance bars to camera
 - [ ] Start heist after practice
 - [ ] Create typing games
 	- [ ] Wordsearch
@@ -32,3 +32,4 @@
 - [ ] Create overload shader
 - [ ] Add backspace-specific sound
 - [ ] Add scrolling texture in addition to modulate
+- [ ] Create locks
