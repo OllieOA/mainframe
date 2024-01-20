@@ -5,6 +5,7 @@ class_name BaseHeist extends Node2D
 @onready var escape_area: Area2D = $EscapeArea
 
 var loot_pile: Array[float]
+var looted_objects: Array[float]
 
 var heistmate_lookup: Array[HeistMate]
 var loot_lookup: Array[BaseLoot]

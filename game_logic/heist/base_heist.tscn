@@ -200,13 +200,10 @@ layer_0/tile_data = PackedInt32Array(-131068, 65540, 3, -131067, 65540, 3, -6553
 position = Vector2(25, -211)
 
 [node name="BaseLoot2" parent="LootObjects" instance=ExtResource("3_68ms1")]
-position = Vector2(121, -208)
+position = Vector2(62, -231)
 
 [node name="BaseLoot3" parent="LootObjects" instance=ExtResource("3_68ms1")]
-position = Vector2(103, -116)
-
-[node name="BaseLoot4" parent="LootObjects" instance=ExtResource("3_68ms1")]
-position = Vector2(75, -195)
+position = Vector2(102, -215)
 
 [node name="HeistMates" type="Node2D" parent="."]
 
