@@ -28,17 +28,18 @@ func _ready() -> void:
 	
 	var idx = 0
 	for minigame_spawn_location in MINIGAME_SPAWN_LOCATIONS:
-		_spawn_minigame(idx, minigame_spawn_location)
+		_spawn_minigame(idx, minigame_spawn_location, PuzzleNode.icon_type_map[idx % 3])
 		
 		idx += 1
 
-func _spawn_minigame(minigame_id: int, minigame_spawn_location: Vector2i) -> void:
+func _spawn_minigame(minigame_id: int, minigame_spawn_location: Vector2i, icon_type: PuzzleNode.IconType) -> void:
 	var new_minigame: Node = MINIGAME_CONSTRUCTOR_SCENE.instantiate()
 	new_minigame.minigame_id = minigame_id
+	new_minigame.minigame_icon_type = icon_type
 
 	var minigame_choice = rng.randi() % MinigameData.MinigameType.size()
 	minigames.add_child(new_minigame)
-	
+
 	new_minigame.create_minigame(minigame_choice)
 	#new_minigame.create_minigame(MinigameData.MinigameType.ANAGRAM)
 	#new_minigame.create_minigame(MinigameData.MinigameType.ALPHABET)
@@ -62,7 +63,8 @@ func _handle_network_node_deactivated(node_id: int) -> void:
 
 
 func _handle_minigame_completed(completed_minigame_id: int) -> void:
+	GameControl.overload_activated.emit(minigame_lookup[completed_minigame_id].minigame_icon_type)
 	for each_node in minigame_lookup:
 		if minigame_lookup[each_node] == null and completed_minigame_id != each_node:
-			_spawn_minigame(each_node, MINIGAME_SPAWN_LOCATIONS[each_node])
+			_spawn_minigame(each_node, MINIGAME_SPAWN_LOCATIONS[each_node], PuzzleNode.icon_type_map[each_node % 3])
 			GameControl.emit_signal("spawned_minigame", each_node)

@@ -9,3 +9,10 @@ res://game_logic/heist/surveillance/surveillance_camera.gd
 res://game_logic/network/puzzle_node.tscn
 res://game_logic/puzzle_node.gd
 res://game_logic/network/jiggle.gd
+res://theme/in_game_menu.tres
+res://game_logic/heist/base_heist.gd
+res://game_logic/heist/surveillance/surveillance_levels.gd
+res://globals/game_control.gd
+res://game_logic/game_scene.gd
+res://game_logic/minigames/base_minigame/minigame_constructor.gd
+res://game_logic/heist/heist_mate.gd

@@ -3,7 +3,7 @@ class_name PuzzleNode extends Node2D
 @onready var puzzle_sprite: Sprite2D = %PuzzleSprite
 
 enum IconType {CIRCLE, SQUARE, DIAMOND}
-var icon_type_map = [IconType.CIRCLE, IconType.SQUARE, IconType.DIAMOND]
+const icon_type_map = [IconType.CIRCLE, IconType.SQUARE, IconType.DIAMOND]
 
 const BASE_SCALE = Vector2(0.8, 0.8)
 

@@ -16,6 +16,7 @@ class_name BaseMinigame extends Node2D
 @onready var jiggle: Jiggle = $Jiggle
 
 var minigame_id: int = -1
+var minigame_icon_type: PuzzleNode.IconType
 var minigame_base_location: Vector2i
 
 

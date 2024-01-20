@@ -1,0 +1,1 @@
+class_name HeistMate extends CharacterBody2D

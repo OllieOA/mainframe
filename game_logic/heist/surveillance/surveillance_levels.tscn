@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://5xbyuedvcd7f"]
+[gd_scene load_steps=10 format=3 uid="uid://5xbyuedvcd7f"]
 
 [ext_resource type="Texture2D" uid="uid://bswbkrrcefyx3" path="res://game_logic/heist/surveillance/circle_surveillance_icon.svg" id="1_leuml"]
 [ext_resource type="Theme" uid="uid://c501q1j77skrq" path="res://game_logic/minigames/base_minigame/minigame_theme.tres" id="1_wypgy"]
 [ext_resource type="Texture2D" uid="uid://3e1amqln3dnj" path="res://ui/common_theme/progress_background.svg" id="2_6ng13"]
+[ext_resource type="Script" path="res://game_logic/heist/surveillance/surveillance_levels.gd" id="2_soi56"]
 [ext_resource type="Texture2D" uid="uid://nk1x4monv01u" path="res://ui/common_theme/progress_texture.svg" id="3_fmohd"]
 [ext_resource type="Texture2D" uid="uid://cglkqo86abphw" path="res://game_logic/heist/surveillance/square_surveillance_icon.svg" id="4_74eyg"]
 [ext_resource type="Texture2D" uid="uid://cxkl43gahn5mf" path="res://game_logic/heist/surveillance/diamond_surveillance_icon.svg" id="5_07hpv"]
+[ext_resource type="Texture2D" uid="uid://dh82o3gqjuvfj" path="res://game_logic/heist/surveillance/overload_background.svg" id="7_uur5d"]
+[ext_resource type="Texture2D" uid="uid://2k8gys0qek70" path="res://game_logic/heist/surveillance/overload_foreground.svg" id="8_0tag5"]
 
 [node name="SurveillanceLevels" type="MarginContainer"]
 anchors_preset = 12
@@ -16,6 +19,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("1_wypgy")
 theme_override_constants/margin_bottom = 20
+script = ExtResource("2_soi56")
 
 [node name="OuterContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -27,21 +31,23 @@ layout_mode = 2
 [node name="SurveillanceTitle" type="Label" parent="OuterContainer/SurveillanceBars"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Suspicion Level"
+text = "Detection Level"
+horizontal_alignment = 2
 
-[node name="CircleSurveillance" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+[node name="CircleSurveillanceContainer" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+unique_name_in_owner = true
 modulate = Color(1, 0, 0, 1)
 layout_mode = 2
 
-[node name="CircleSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/CircleSurveillance"]
+[node name="CircleSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/CircleSurveillanceContainer"]
 layout_mode = 2
 texture = ExtResource("1_leuml")
 
-[node name="CircleSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/CircleSurveillance"]
+[node name="CircleSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/CircleSurveillanceContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-step = 0.5
+step = 0.1
 value = 50.0
 nine_patch_stretch = true
 stretch_margin_left = 10
@@ -51,19 +57,20 @@ stretch_margin_bottom = 10
 texture_under = ExtResource("2_6ng13")
 texture_progress = ExtResource("3_fmohd")
 
-[node name="SquareSurveillance" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+[node name="SquareSurveillanceContainer" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+unique_name_in_owner = true
 modulate = Color(0, 1, 0, 1)
 layout_mode = 2
 
-[node name="SquareSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/SquareSurveillance"]
+[node name="SquareSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/SquareSurveillanceContainer"]
 layout_mode = 2
 texture = ExtResource("4_74eyg")
 
-[node name="SquareSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/SquareSurveillance"]
+[node name="SquareSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/SquareSurveillanceContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-step = 0.5
+step = 0.1
 value = 50.0
 nine_patch_stretch = true
 stretch_margin_left = 10
@@ -73,19 +80,20 @@ stretch_margin_bottom = 10
 texture_under = ExtResource("2_6ng13")
 texture_progress = ExtResource("3_fmohd")
 
-[node name="DiamondSurveillance" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+[node name="DiamondSurveillanceContainer" type="HBoxContainer" parent="OuterContainer/SurveillanceBars"]
+unique_name_in_owner = true
 modulate = Color(0, 0, 0.803922, 1)
 layout_mode = 2
 
-[node name="DiamondSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/DiamondSurveillance"]
+[node name="DiamondSurveillanceIcon" type="TextureRect" parent="OuterContainer/SurveillanceBars/DiamondSurveillanceContainer"]
 layout_mode = 2
 texture = ExtResource("5_07hpv")
 
-[node name="DiamondSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/DiamondSurveillance"]
+[node name="DiamondSurveillanceLevel" type="TextureProgressBar" parent="OuterContainer/SurveillanceBars/DiamondSurveillanceContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-step = 0.5
+step = 0.1
 value = 50.0
 nine_patch_stretch = true
 stretch_margin_left = 10
@@ -109,4 +117,8 @@ text = "Overload"
 [node name="OverloadLevel" type="TextureProgressBar" parent="OuterContainer/OverloadBar"]
 unique_name_in_owner = true
 layout_mode = 2
-texture_over = ExtResource("3_fmohd")
+step = 0.1
+value = 60.0
+fill_mode = 3
+texture_under = ExtResource("7_uur5d")
+texture_progress = ExtResource("8_0tag5")

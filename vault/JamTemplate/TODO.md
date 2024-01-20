@@ -1,9 +1,8 @@
 # Core
 - [ ] Create background image (computer screen + post-its)
-- [ ] Create camera object
+- [x] Create camera object
 	- [x] Make raycasts
 	- [x] Make polygon
-	- [ ] Add shape texture to camera object
 - [ ] Create heist-mates
 	- [ ] Make texture bar
 	- [ ] Make navigation
@@ -32,3 +31,4 @@
 - [ ] Create guard event
 - [ ] Create overload shader
 - [ ] Add backspace-specific sound
+- [ ] Add scrolling texture in addition to modulate

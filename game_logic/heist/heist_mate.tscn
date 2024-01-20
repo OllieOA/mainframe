@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2x4q2cuc081f"]
+[gd_scene load_steps=5 format=3 uid="uid://c2x4q2cuc081f"]
 
+[ext_resource type="Script" path="res://game_logic/heist/heist_mate.gd" id="1_4apvk"]
 [ext_resource type="Texture2D" uid="uid://tkfcrorp2jkl" path="res://game_logic/heist/heistmate_sprite.svg" id="1_qntc8"]
 [ext_resource type="Texture2D" uid="uid://cfaqc2e40p035" path="res://game_logic/heist/radial_texture.svg" id="2_lqt4k"]
 
@@ -8,6 +9,7 @@ radius = 8.0
 
 [node name="HeistMate" type="CharacterBody2D"]
 collision_layer = 2
+script = ExtResource("1_4apvk")
 
 [node name="ProgressBar" type="TextureProgressBar" parent="."]
 offset_left = -15.0

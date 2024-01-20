@@ -9,6 +9,12 @@ signal destroyed_minigame(destroyed_minigame_id: int)
 signal spawned_minigame(spawned_minigame_id: int)
 signal player_str_updated(key_valid: bool, minigame_id: int)
 
+signal heistmate_entered_view(camera_type: PuzzleNode.IconType)
+signal heistmate_exited_view(camera_type: PuzzleNode.IconType)
+
+signal overload_activated(camera_type: PuzzleNode.IconType)
+signal overload_exhausted()
+
 signal surveillance_activated()
 signal escape_activated()
 
@@ -16,11 +22,33 @@ var autohack_time: float = 4.0
 var autohack_time_increase: float = 0.5
 var autohack_available: bool = false
 
-var red_detection_level: float = 0.0
-var green_detection_level: float = 0.0
-var blue_detection_level: float = 0.0
+var overload_level: float = 100.0
+var overload_decay_base: float = 10.0
+var overload_decay: float = 100.0  # TODO Set up combo effect
+const MAX_OVERLOAD: float = 100.0
 
-var detection_rate: float = 1.0
+var detection_lookup: Dictionary = {
+	PuzzleNode.IconType.CIRCLE: {
+		"count": 0,
+		"level": 0.0,
+		"jammed": false
+	},
+	PuzzleNode.IconType.SQUARE: {
+		"count": 0,
+		"level": 0.0,
+		"jammed": false
+	},
+	PuzzleNode.IconType.DIAMOND: {
+		"count": 0,
+		"level": 0.0,
+		"jammed": false
+	},
+}
+
+var detection_decay: float = 1.0
+var detection_rate: float = 10.0
+var max_detection: float = 100.0
+# yag was here. finally.
 
 var minigame_active: bool = false
 var active_minigame_id: int = -1
@@ -42,6 +70,37 @@ func _ready() -> void:
 	
 	connect("surveillance_activated", _handle_surveillance_activated)
 	connect("escape_activated", _handle_escape_activated)
+	
+	overload_activated.connect(_handle_overload_activated)
+	overload_exhausted.connect(_handle_overload_exhausted)
+	
+	connect("heistmate_entered_view", _handle_heistmate_entered_view)
+	connect("heistmate_exited_view", _handle_heistmate_exited_view)
+	
+	# TEMP
+	surveillance_active = true
+
+
+func _process(delta: float) -> void:
+	if surveillance_active:
+		update_levels(delta)
+	update_overload(delta)
+
+
+func update_levels(delta: float) -> void:
+	for detection_info in detection_lookup.values():
+		if detection_info["count"] == 0 or detection_info["jammed"]:
+			detection_info["level"] -= delta * detection_decay
+		else:
+			detection_info["level"] += delta * detection_info["count"] * detection_rate
+			if detection_info["level"] >= max_detection:
+				GameControl.escape_activated.emit()
+
+
+func update_overload(delta: float ) -> void:
+	overload_level -= overload_decay * delta
+	if overload_level <= 0.0:
+		overload_exhausted.emit()
 
 
 func _handle_minigame_activated(activated_minigame_id: int) -> void:
@@ -76,3 +135,23 @@ func _handle_surveillance_activated() -> void:
 func _handle_escape_activated() -> void:
 	surveillance_active = false
 	escape_active = true
+	for detection_info in detection_lookup.values():
+		detection_info["level"] = max_detection
+
+
+func _handle_heistmate_entered_view(camera_type: PuzzleNode.IconType) -> void:
+	detection_lookup[camera_type]["count"] += 1
+
+
+func _handle_heistmate_exited_view(camera_type: PuzzleNode.IconType) -> void:
+	detection_lookup[camera_type]["count"] -= 1
+
+
+func _handle_overload_activated(camera_type: PuzzleNode.IconType) -> void:
+	overload_level = MAX_OVERLOAD
+	detection_lookup[camera_type]["jammed"] = true
+
+
+func _handle_overload_exhausted() -> void:
+	for detection_info in detection_lookup.values():
+		detection_info["jammed"] = false
