@@ -147,9 +147,9 @@ func check_state(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	check_state(delta)
-	if last_state != state:
-		print(State.keys()[state])
-		last_state = state
+	#if last_state != state:
+		#print(State.keys()[state])
+		#last_state = state
 
 
 func _move(delta: float) -> void:

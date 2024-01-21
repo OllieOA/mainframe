@@ -72,8 +72,9 @@ func _get_lines() -> PackedVector2Array:
 
 
 func _populate_network() -> void:
-	var base_screen_transform = DisplayServer.window_get_size()
-	var screen_center = Vector2i(base_screen_transform.x / 2, base_screen_transform.y / 2)
+	#var base_screen_transform = DisplayServer.window_get_size()
+	var base_screen_rect: Rect2 = get_viewport_rect()
+	var screen_center = Vector2i(base_screen_rect.size.x / 2, base_screen_rect.size.y / 2)
 	
 	var curr_angle: float = 0.0
 	var hex_points: Array = []
