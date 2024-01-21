@@ -3,7 +3,6 @@ class_name HeistMate extends CharacterBody2D
 @onready var heist_nav: NavigationAgent2D = $HeistNav
 @onready var action_progress: TextureProgressBar = $ActionProgress
 
-
 enum State {
 	IDLE, 
 	PACKING, 

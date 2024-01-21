@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://cfaqc2e40p035" path="res://game_logic/heist/radial_texture.svg" id="2_lqt4k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tddk7"]
-radius = 8.0
 
 [node name="HeistMate" type="CharacterBody2D"]
 collision_layer = 2

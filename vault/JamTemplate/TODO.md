@@ -23,6 +23,7 @@
 	- [x] Acronym
 	- [x] Vowels
 	- [x] Consonants
+- [ ] Make heistmates go to closest
 - [ ] Implement police minigame
 - [ ] Implement win screen
 - [ ] Implement restart

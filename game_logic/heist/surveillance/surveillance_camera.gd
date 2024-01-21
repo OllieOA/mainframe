@@ -75,14 +75,15 @@ func update_cone() -> void:
 	_cast_all_rays()
 	_build_shape_params()
 	_update_collision_polygon()
-	heistmate_seen_this_frame = len(collision_area.get_overlapping_bodies()) > 0
-	if not heistmate_in_view and heistmate_seen_this_frame:
-		heistmate_in_view = true
-		GameControl.emit_signal("heistmate_entered_view", camera_type)
-	
-	if heistmate_in_view and not heistmate_seen_this_frame:
-		heistmate_in_view = false
-		GameControl.emit_signal("heistmate_exited_view", camera_type)
+	GameControl.detection_lookup[camera_type]["count"] = len(collision_area.get_overlapping_bodies())
+	#heistmate_seen_this_frame = len(collision_area.get_overlapping_bodies()) > 0
+	#if not heistmate_in_view and heistmate_seen_this_frame:
+		#heistmate_in_view = true
+		#GameControl.emit_signal("heistmate_entered_view", camera_type)
+	#
+	#if heistmate_in_view and not heistmate_seen_this_frame:
+		#heistmate_in_view = false
+		#GameControl.emit_signal("heistmate_exited_view", camera_type)
 	
 	# Then update drawing
 	queue_redraw()

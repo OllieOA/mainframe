@@ -9,9 +9,6 @@ signal destroyed_minigame(destroyed_minigame_id: int)
 signal spawned_minigame(spawned_minigame_id: int)
 signal player_str_updated(key_valid: bool, minigame_id: int)
 
-signal heistmate_entered_view(camera_type: PuzzleNode.IconType)
-signal heistmate_exited_view(camera_type: PuzzleNode.IconType)
-
 signal overload_activated(camera_type: PuzzleNode.IconType)
 signal overload_exhausted()
 signal overload_combo_activated()
@@ -80,9 +77,6 @@ func _ready() -> void:
 	
 	overload_activated.connect(_handle_overload_activated)
 	overload_exhausted.connect(_handle_overload_exhausted)
-	
-	heistmate_entered_view.connect(_handle_heistmate_entered_view)
-	heistmate_exited_view.connect(_handle_heistmate_exited_view)
 	
 	surveillance_active = false
 
@@ -153,14 +147,6 @@ func _handle_escape_activated() -> void:
 	escape_active = true
 	for detection_info in detection_lookup.values():
 		detection_info["level"] = max_detection
-
-
-func _handle_heistmate_entered_view(camera_type: PuzzleNode.IconType) -> void:
-	detection_lookup[camera_type]["count"] += 1
-
-
-func _handle_heistmate_exited_view(camera_type: PuzzleNode.IconType) -> void:
-	detection_lookup[camera_type]["count"] -= 1
 
 
 func _handle_overload_activated(camera_type: PuzzleNode.IconType) -> void:
