@@ -35,8 +35,10 @@ const UNENCUMBERED_SPEED: float = 2000.0
 const ENCUMBERED_SPEED: float = 800.0
 
 var state: State = State.IDLE
+var last_state: State = State.IDLE
 var inventory: Array[float]
 const INV_SIZE: int = 2
+# something about a potato
 
 
 func _ready() -> void:
@@ -59,7 +61,6 @@ func _start_action() -> void:
 func _stop_action() -> void:
 	action_progress.value = 0.0
 	action_progress.hide()
-	
 
 
 func check_state(delta: float) -> void:
@@ -67,7 +68,7 @@ func check_state(delta: float) -> void:
 		State.IDLE:
 			target_loot_object = heist_ref.get_loot_object()
 			if target_loot_object == null:
-				set_movement_target(heist_ref.escape_area.global_position)
+				set_movement_target(heist_ref.escape_area.global_position + Vector2(0, 20))
 				state = State.LEAVING
 				exiting_triggered = true
 			else:
@@ -83,15 +84,17 @@ func check_state(delta: float) -> void:
 		State.PACKING:
 			action_progress.value += packing_speed * delta
 			if action_progress.value >= 100.0:
+				target_loot_object.queue_free()
 				action_progress.hide()
 				inventory.append(target_loot_object.price)
+				inventory.sort()
 				if len(inventory) == INV_SIZE:
 					state = State.FULL
 				else:
 					state = State.IDLE
 		State.FULL:
 			heistmate_speed = ENCUMBERED_SPEED
-			set_movement_target(heist_ref.escape_area.global_position)
+			set_movement_target(heist_ref.escape_area.global_position + Vector2(0, 20))
 			state = State.RETURNING
 		State.RETURNING:
 			_move(delta)
@@ -103,7 +106,7 @@ func check_state(delta: float) -> void:
 		State.UNLOADING:
 			action_progress.value += unloading_speed * delta
 			if action_progress.value >= 100.0:
-				heist_ref.loot_pile.append(inventory.pop_front())
+				heist_ref.add_to_pile(inventory.pop_back())
 				if len(inventory) > 0:
 					action_progress.value = 0.0
 				else:
@@ -122,20 +125,21 @@ func check_state(delta: float) -> void:
 					_start_action()
 					state = State.UNLOADING
 				else:
+					_start_action()
 					state = State.PILFERING
 		State.PILFERING:
-			_start_action()
 			if len(inventory) == 0:
 				action_progress.value += packing_speed * delta
 				if action_progress.value >= 100.0:
 					if len(heist_ref.loot_pile) == 0:
 						state = State.EXTRACTING
-					inventory.append(heist_ref.loot_pile.pop_front())
-					action_progress.value = 0.0
+					else:
+						inventory.append(heist_ref.remove_from_pile())
+						action_progress.value = 0.0
 			else:
 				action_progress.value += pilfering_speed * delta
 				if action_progress.value >= 100.0:
-					heist_ref.looted_objects.append(inventory.pop_front())
+					heist_ref.add_to_pilfered(inventory.pop_back())
 					action_progress.value = 0.0
 		State.EXTRACTING:
 			queue_free()
@@ -143,6 +147,9 @@ func check_state(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	check_state(delta)
+	#if last_state != state:
+		#print(State.keys()[state])
+		#last_state = state
 
 
 func _move(delta: float) -> void:

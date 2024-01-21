@@ -29,10 +29,10 @@ const COLOR_LOOKUP: Dictionary = {
 	},
 	IconType.SQUARE: {
 		"active": Color.GREEN,
-		"inactive": Color.DARK_GREEN
+		"inactive": Color.WEB_GREEN
 	},
 	IconType.DIAMOND: {
-		"active": Color.MEDIUM_BLUE,
+		"active": Color.BLUE,
 		"inactive": Color.DARK_BLUE
 	}
 }
@@ -47,8 +47,9 @@ var node_active: bool = false
 
 
 func _ready() -> void:
-	jiggle.node_base_coord = node_base_coord
-	jiggle.jiggle_enabled = true
+	pass
+	#jiggle.node_base_coord = node_base_coord
+	#jiggle.jiggle_enabled = true
 
 
 func set_icon_type(requested_icon: int) -> void:

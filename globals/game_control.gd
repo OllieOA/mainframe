@@ -24,7 +24,7 @@ var autohack_available: bool = false
 
 var overload_level: float = 100.0
 var overload_decay_base: float = 10.0
-var overload_decay: float = 100.0  # TODO Set up combo effect
+var overload_decay: float = 10.0  # TODO Set up combo effect
 const MAX_OVERLOAD: float = 100.0
 
 var detection_lookup: Dictionary = {

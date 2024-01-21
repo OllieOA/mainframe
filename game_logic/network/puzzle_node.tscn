@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://dok2h5016hktp"]
+[gd_scene load_steps=2 format=3 uid="uid://dok2h5016hktp"]
 
 [ext_resource type="Script" path="res://game_logic/puzzle_node.gd" id="1_7b8pu"]
-[ext_resource type="PackedScene" uid="uid://cwf2equvg687u" path="res://game_logic/network/jiggle.tscn" id="2_q7pnj"]
 
 [node name="PuzzleNode" type="Node2D"]
 script = ExtResource("1_7b8pu")
 
+[node name="BackgroundTexture" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(100, 100)
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+
 [node name="PuzzleSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-
-[node name="Jiggle" parent="." node_paths=PackedStringArray("node_to_jiggle") instance=ExtResource("2_q7pnj")]
-node_to_jiggle = NodePath("..")

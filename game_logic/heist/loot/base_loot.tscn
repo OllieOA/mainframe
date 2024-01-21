@@ -8,5 +8,4 @@ script = ExtResource("1_gocw2")
 
 [node name="LootSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_3764o")
-
-[node name="BaggedSprite" type="Sprite2D" parent="."]
+hframes = 3

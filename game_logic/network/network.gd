@@ -3,8 +3,9 @@ class_name Network extends Node2D
 signal network_node_activated(activated_node_id: int)
 signal network_node_deactivated(deactivated_node_id: int)
 
-const HEX_RADIUS = 475
-const SCREEN_OFFSET = Vector2i(0, -70)
+const HEX_RADIUS := 480
+const HORIZ_OFFSET := Vector2i(100, 0)
+const SCREEN_OFFSET := Vector2i(0, -18)
 const PUZZLE_NODE = preload("res://game_logic/network/puzzle_node.tscn")
 
 @onready var move_allowed: AudioStreamPlayer = $MoveAllowed
@@ -34,7 +35,8 @@ func _process(delta: float) -> void:
 
 func _draw() -> void:
 	polyline_spec = _get_lines()
-	draw_polyline(polyline_spec, Color.WEB_GRAY, 5.0, true)
+	draw_polyline(polyline_spec, Color.BLACK, 12.0, true)
+	draw_polyline(polyline_spec, Color.WHITE_SMOKE, 6.0, true)
 
 
 func _get_lines() -> PackedVector2Array:
@@ -76,6 +78,7 @@ func _populate_network() -> void:
 	var hex_points: Array = []
 	
 	for _i in range(6):
+		
 		var new_point = Vector2i(int(HEX_RADIUS * cos(curr_angle)), int(HEX_RADIUS * sin(curr_angle))) + screen_center + SCREEN_OFFSET
 		hex_points.append(new_point)
 		curr_angle += 60 * PI/180

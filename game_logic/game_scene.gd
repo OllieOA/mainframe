@@ -8,12 +8,12 @@ class_name GameScene extends Node2D
 const MINIGAME_CONSTRUCTOR_SCENE = preload("res://game_logic/minigames/base_minigame/minigame_constructor.tscn")
 
 const MINIGAME_SPAWN_LOCATIONS: Array = [
-	Vector2i(1480, 360),
-	Vector2i(1440, 700),
-	Vector2i(120, 700),
-	Vector2i(80, 360),
-	Vector2i(120, 20),
-	Vector2i(1440, 20),
+	Vector2i(1480 - 40, 360),
+	Vector2i(1440 - 40, 630),
+	Vector2i(120 + 40, 630),
+	Vector2i(80 + 40, 360),
+	Vector2i(120 + 40, 50),
+	Vector2i(1440 - 40, 50),
 ]
 
 var minigame_lookup: Dictionary

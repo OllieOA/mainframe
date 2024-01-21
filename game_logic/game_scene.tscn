@@ -1,12 +1,147 @@
-[gd_scene load_steps=5 format=3 uid="uid://bma5d8atvru2"]
+[gd_scene load_steps=9 format=3 uid="uid://bma5d8atvru2"]
 
 [ext_resource type="Script" path="res://game_logic/game_scene.gd" id="1_cmye7"]
 [ext_resource type="PackedScene" uid="uid://cpq5muosc6rqg" path="res://game_logic/network/network.tscn" id="2_rhchi"]
+[ext_resource type="Texture2D" uid="uid://bvc3g708iq0fe" path="res://ui/common_theme/laptop_screen.svg" id="2_yrdhf"]
 [ext_resource type="PackedScene" uid="uid://5xbyuedvcd7f" path="res://game_logic/heist/surveillance/surveillance_levels.tscn" id="3_1a3rm"]
 [ext_resource type="PackedScene" uid="uid://b7molbvn5kuvf" path="res://game_logic/heist/base_heist.tscn" id="3_v745p"]
+[ext_resource type="Texture2D" uid="uid://dg31q4najj3mi" path="res://game_logic/heist/postit_tutorial.svg" id="6_80j1w"]
+[ext_resource type="FontFile" uid="uid://cyrqfnghr6ja" path="res://theme/Handwritten.ttf" id="7_7hmxi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w2a1s"]
+texture = ExtResource("6_80j1w")
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_cmye7")
+
+[node name="PostItTutorials" type="Node2D" parent="."]
+
+[node name="TutorialLetters" type="PanelContainer" parent="PostItTutorials"]
+offset_left = 44.0
+offset_top = 900.0
+offset_right = 174.0
+offset_bottom = 1030.0
+rotation = 0.32986
+theme_override_styles/panel = SubResource("StyleBoxTexture_w2a1s")
+
+[node name="MarginContainer" type="MarginContainer" parent="PostItTutorials/TutorialLetters"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="PostItTutorials/TutorialLetters/MarginContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("7_7hmxi")
+theme_override_font_sizes/font_size = 28
+text = "Remember - only letters work"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TutorialCaps" type="PanelContainer" parent="PostItTutorials"]
+offset_left = 141.0
+offset_top = 956.0
+offset_right = 271.0
+offset_bottom = 1086.0
+rotation = 0.0875866
+theme_override_styles/panel = SubResource("StyleBoxTexture_w2a1s")
+
+[node name="MarginContainer" type="MarginContainer" parent="PostItTutorials/TutorialCaps"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="PostItTutorials/TutorialCaps/MarginContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("7_7hmxi")
+theme_override_font_sizes/font_size = 28
+text = "+ and you don't need to press shift or caps"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TutorialArt" type="PanelContainer" parent="PostItTutorials"]
+offset_left = 9.0
+offset_top = 37.0
+offset_right = 139.0
+offset_bottom = 167.0
+rotation = -0.208971
+theme_override_styles/panel = SubResource("StyleBoxTexture_w2a1s")
+
+[node name="MarginContainer" type="MarginContainer" parent="PostItTutorials/TutorialArt"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="PostItTutorials/TutorialArt/MarginContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("7_7hmxi")
+theme_override_font_sizes/font_size = 28
+text = "Art gallery job - over $1M!! need crew asap"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="TutorialPolice" type="PanelContainer" parent="PostItTutorials"]
+offset_left = 1773.0
+offset_top = 961.0
+offset_right = 1903.0
+offset_bottom = 1091.0
+rotation = -0.208971
+theme_override_styles/panel = SubResource("StyleBoxTexture_w2a1s")
+
+[node name="MarginContainer" type="MarginContainer" parent="PostItTutorials/TutorialPolice"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="PostItTutorials/TutorialPolice/MarginContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("7_7hmxi")
+theme_override_font_sizes/font_size = 28
+text = "ANY hack works when the cops are on the way!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Desktop" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="DesktopBackground" type="TextureRect" parent="Desktop"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_yrdhf")
+
+[node name="BaseHeist" parent="." instance=ExtResource("3_v745p")]
+position = Vector2(962, 489)
 
 [node name="Network" parent="." instance=ExtResource("2_rhchi")]
 
@@ -16,6 +151,7 @@ unique_name_in_owner = true
 [node name="SurveillanceBars" type="CanvasLayer" parent="."]
 
 [node name="SurveillanceLevels" parent="SurveillanceBars" instance=ExtResource("3_1a3rm")]
-
-[node name="BaseHeist" parent="." instance=ExtResource("3_v745p")]
-position = Vector2(962, 489)
+offset_left = 187.0
+offset_top = -229.0
+offset_right = 187.0
+offset_bottom = -32.0

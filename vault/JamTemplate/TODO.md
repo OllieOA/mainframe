@@ -1,14 +1,17 @@
 # Core
-- [ ] Create background image (computer screen + post-its)
+- [ ] Create background image
+	- [ ] Computer screen
+	- [ ] Post-it tutorials
 - [x] Create camera object
 	- [x] Make raycasts
 	- [x] Make polygon
 - [ ] Create heist-mates
 	- [x] Make texture bar
 	- [x] Make navigation
-	- [ ] Add inventory
-- [ ] Add heist return logic
-- [ ] Create objects to steal
+	- [x] Add inventory
+- [x] Add heist return logic
+- [x] Create objects to steal
+- [ ] Create autohack sequence
 - [ ] Create heist sequence (just navigation?)
 - [x] Link surveillance bars to camera
 - [ ] Start heist after practice
