@@ -7,6 +7,9 @@ var valid_scancodes: Array
 var special_scancodes := [KEY_PERIOD]
 var alpha_scancodes: Array
 var alphabet: Array
+var vowels: Array
+var consonants: Array
+
 
 const SPECIAL_LOOKUP = {
 	KEY_PERIOD: ".",
@@ -46,6 +49,12 @@ func _generate_alphabet() -> void:
 	# Set other scancodes
 	valid_scancodes = alpha_scancodes.duplicate()
 	valid_scancodes += special_scancodes
+	
+	for each_char in alphabet:
+		if each_char in ["A", "E", "I", "O", "U"]:
+			vowels.append(each_char)
+		else:
+			consonants.append(each_char)
 
 
 func get_random_words(target_num_words: int, min_word_length: int, max_word_length: int) -> Array:

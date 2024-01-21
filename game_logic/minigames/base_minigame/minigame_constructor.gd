@@ -7,13 +7,11 @@ class_name BaseMinigame extends Node2D
 
 @onready var prompt_text: Label = %PromptText
 @onready var minigame_container: Control = %MinigameContainer
-@onready var auto_hack: Button = %AutoHack
+@onready var auto_hack: Label = %AutoHack
 @onready var auto_hack_progress: ProgressBar = %AutoHackProgress
 
 @onready var main_container: PanelContainer = %MainContainer
 @onready var minigame_icon: TextureRect = %MinigameIcon
-
-@onready var jiggle: Jiggle = $Jiggle
 
 var minigame_id: int = -1
 var minigame_icon_type: PuzzleNode.IconType
@@ -24,16 +22,15 @@ func _ready() -> void:
 	GameControl.connect("autohack_made_available", _handle_autohack_made_available)
 	GameControl.connect("autohack_triggered", _handle_autohack_used)
 	GameControl.connect("completed_minigame", _handle_completed_minigame)
-	call_deferred("_start_jiggle")
+	if GameControl.surveillance_active:
+		if GameControl.autohack_level < 100.0:
+			_handle_autohack_used()
+		else:
+			_handle_autohack_made_available()
 
 
 func _process(delta: float) -> void:
-	auto_hack_progress.value = 100.0 * (1.0 - GameControl.autohack_timer.time_left) / GameControl.autohack_time
-
-
-func _start_jiggle() -> void:
-	jiggle.node_base_coord = minigame_base_location
-	jiggle.enable_jiggle()
+	auto_hack_progress.value = GameControl.autohack_level
 
 
 func create_minigame(val: MinigameData.MinigameType) -> void:
@@ -59,20 +56,16 @@ func _handle_completed_minigame(completed_minigame_id: int):
 func deactivate_minigame() -> void:
 	main_container.hide()
 	minigame_icon.show()
-	jiggle.enable_jiggle()
 
 
 func activate_minigame() -> void:
 	main_container.show()
 	minigame_icon.hide()
-	jiggle.reset_position()
 
 
 func _handle_autohack_made_available() -> void:
-	if auto_hack.disabled:
-		auto_hack.disabled = false
+	auto_hack.text = "SPACE to Autohack!"
 
 
 func _handle_autohack_used() -> void:
-	if not auto_hack.disabled:
-		auto_hack.disabled = true
+	auto_hack.text = "Preparing Autohack..."

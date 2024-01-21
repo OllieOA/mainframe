@@ -44,6 +44,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if GameControl.active_minigame_id != minigame_id:
 		return
 	
+	if event.is_action_pressed("main_action") and GameControl.autohack_available:
+		GameControl.autohack_triggered.emit()
+		finish_minigame()
 	
 	if event.is_action_pressed("backspace_word") and can_backspace:
 		player_str = player_str.substr(0, len(player_str) - 1)

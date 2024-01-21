@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk2q7rrcg2m4p"]
+
+[ext_resource type="PackedScene" uid="uid://cwva2be5l0yso" path="res://game_logic/minigames/base_minigame/minigame.tscn" id="1_r618k"]
+[ext_resource type="Script" path="res://game_logic/minigames/prompt.gd" id="2_o6mw7"]
+
+[node name="Prompt" instance=ExtResource("1_r618k")]
+script = ExtResource("2_o6mw7")
+
+[node name="Prompt" type="RichTextLabel" parent="MinigameMargins" index="0"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 34
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false

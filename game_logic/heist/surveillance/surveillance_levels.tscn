@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dh82o3gqjuvfj" path="res://game_logic/heist/surveillance/overload_background.svg" id="7_uur5d"]
 [ext_resource type="Texture2D" uid="uid://2k8gys0qek70" path="res://game_logic/heist/surveillance/overload_foreground.svg" id="8_0tag5"]
 
-[node name="SurveillanceLevels" type="MarginContainer"]
+[node name="SurveillanceLevels" type="PanelContainer"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -19,7 +19,6 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(0.8, 0.8)
 theme = ExtResource("1_wypgy")
-theme_override_constants/margin_bottom = 20
 script = ExtResource("2_soi56")
 
 [node name="OuterContainer" type="HBoxContainer" parent="."]
@@ -117,9 +116,16 @@ text = "Overload"
 
 [node name="OverloadLevel" type="TextureProgressBar" parent="OuterContainer/OverloadBar"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 step = 0.1
 value = 60.0
 fill_mode = 3
+nine_patch_stretch = true
 texture_under = ExtResource("7_uur5d")
 texture_progress = ExtResource("8_0tag5")
+
+[node name="OverloadCombos" type="Label" parent="OuterContainer/OverloadBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Combo: 0"

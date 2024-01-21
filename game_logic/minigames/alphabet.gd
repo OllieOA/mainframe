@@ -15,6 +15,7 @@ func _ready() -> void:
 	can_backspace = false
 	call_deferred("_populate_alphabet")
 
+
 func _populate_alphabet() -> void:
 	for character in WordUtils.alphabet:
 		correct_word += character

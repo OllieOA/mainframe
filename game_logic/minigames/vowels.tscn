@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://v2fbmcwdesx8"]
+
+[ext_resource type="PackedScene" uid="uid://cwva2be5l0yso" path="res://game_logic/minigames/base_minigame/minigame.tscn" id="1_wpimv"]
+[ext_resource type="Script" path="res://game_logic/minigames/vowels.gd" id="2_k2mwi"]
+
+[node name="Vowels" instance=ExtResource("1_wpimv")]
+script = ExtResource("2_k2mwi")
+
+[node name="VowelsPrompt" type="RichTextLabel" parent="MinigameMargins" index="0"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 34
+bbcode_enabled = true
+text = "Prompt"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false

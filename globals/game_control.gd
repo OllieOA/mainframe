@@ -14,17 +14,24 @@ signal heistmate_exited_view(camera_type: PuzzleNode.IconType)
 
 signal overload_activated(camera_type: PuzzleNode.IconType)
 signal overload_exhausted()
+signal overload_combo_activated()
 
 signal surveillance_activated()
 signal escape_activated()
 
-var autohack_time: float = 4.0
-var autohack_time_increase: float = 0.5
+var autohack_level: float = 0.0
+const BASE_AUTO_HACK_FILL_SPEED: float = 4.0
+const MIN_AUTOHACK_FILL_SPEED: float = 1.0
+var autohack_fill_speed: float = 4.0
+#var autohack_fill_speed: float = 50.0
+var autohack_fill_slow: float = 0.25
 var autohack_available: bool = false
 
-var overload_level: float = 100.0
-var overload_decay_base: float = 10.0
-var overload_decay: float = 10.0  # TODO Set up combo effect
+var overload_level: float = 0.0
+var overload_active: bool = false
+var overload_decay_base: float = 5.0
+var overload_decay: float = 5.0
+var overload_factor: float = 1.4
 const MAX_OVERLOAD: float = 100.0
 
 var detection_lookup: Dictionary = {
@@ -54,37 +61,42 @@ var minigame_active: bool = false
 var active_minigame_id: int = -1
 
 var surveillance_active: bool = false
+var calibration_active: bool = false
 var escape_active: bool = false
 
 @onready var autohack_timer: Timer = $AutohackTimer
 
 
 func _ready() -> void:
-	autohack_timer.autostart = false
-	autohack_timer.connect("timeout", _handle_autohack_timeout)
+	activated_minigame.connect(_handle_minigame_activated)
+	deactivated_minigame.connect(_handle_minigame_deactivated)
+	completed_minigame.connect(_handle_minigame_completed)
+	destroyed_minigame.connect(_handle_minigame_destroyed)
 	
-	connect("activated_minigame", _handle_minigame_activated)
-	connect("deactivated_minigame", _handle_minigame_deactivated)
-	connect("completed_minigame", _handle_minigame_completed)
-	connect("destroyed_minigame", _handle_minigame_destroyed)
+	autohack_triggered.connect(_handle_autohack_triggered)
 	
-	connect("surveillance_activated", _handle_surveillance_activated)
-	connect("escape_activated", _handle_escape_activated)
+	surveillance_activated.connect(_handle_surveillance_activated)
+	escape_activated.connect(_handle_escape_activated)
 	
 	overload_activated.connect(_handle_overload_activated)
 	overload_exhausted.connect(_handle_overload_exhausted)
 	
-	connect("heistmate_entered_view", _handle_heistmate_entered_view)
-	connect("heistmate_exited_view", _handle_heistmate_exited_view)
+	heistmate_entered_view.connect(_handle_heistmate_entered_view)
+	heistmate_exited_view.connect(_handle_heistmate_exited_view)
 	
-	# TEMP
-	surveillance_active = true
+	surveillance_active = false
 
 
 func _process(delta: float) -> void:
 	if surveillance_active:
 		update_levels(delta)
-	update_overload(delta)
+	
+	if surveillance_active or escape_active:
+		update_overload(delta)
+		update_autohack(delta)
+
+	if calibration_active:
+		update_overload(delta)
 
 
 func update_levels(delta: float) -> void:
@@ -97,10 +109,19 @@ func update_levels(delta: float) -> void:
 				GameControl.escape_activated.emit()
 
 
-func update_overload(delta: float ) -> void:
+func update_overload(delta: float) -> void:
 	overload_level -= overload_decay * delta
 	if overload_level <= 0.0:
 		overload_exhausted.emit()
+
+
+func update_autohack(delta: float) -> void:
+	if not autohack_available:
+		autohack_level += autohack_fill_speed * delta
+		autohack_level = clamp(autohack_level, 0.0, 100.0)
+		if autohack_level >= 100.0:
+			autohack_available = true
+			autohack_made_available.emit()
 
 
 func _handle_minigame_activated(activated_minigame_id: int) -> void:
@@ -122,14 +143,9 @@ func _handle_minigame_destroyed(destroyed_minigame_id: int) -> void:
 	pass
 
 
-func _handle_autohack_timeout() -> void:
-	autohack_time += autohack_time_increase
-	autohack_timer.wait_time = autohack_time
-	emit_signal("autohack_made_available")
-
-
 func _handle_surveillance_activated() -> void:
 	surveillance_active = true
+	overload_level = 0.1
 
 
 func _handle_escape_activated() -> void:
@@ -149,9 +165,22 @@ func _handle_heistmate_exited_view(camera_type: PuzzleNode.IconType) -> void:
 
 func _handle_overload_activated(camera_type: PuzzleNode.IconType) -> void:
 	overload_level = MAX_OVERLOAD
+	if overload_active:
+		overload_combo_activated.emit()
+	overload_active = true
 	detection_lookup[camera_type]["jammed"] = true
+	overload_decay *= overload_factor
 
 
 func _handle_overload_exhausted() -> void:
 	for detection_info in detection_lookup.values():
 		detection_info["jammed"] = false
+	
+	overload_active = false
+	overload_decay = overload_decay_base
+
+
+func _handle_autohack_triggered() -> void:
+	autohack_available = false
+	autohack_level = 0.0
+	autohack_fill_speed = clamp(autohack_fill_speed - autohack_fill_slow, MIN_AUTOHACK_FILL_SPEED, autohack_fill_speed)

@@ -1,4 +1,4 @@
-class_name SurveillanceLevels extends MarginContainer
+class_name SurveillanceLevels extends PanelContainer
 
 @onready var circle_surveillance_level: TextureProgressBar = %CircleSurveillanceLevel
 @onready var square_surveillance_level: TextureProgressBar = %SquareSurveillanceLevel
@@ -8,6 +8,9 @@ class_name SurveillanceLevels extends MarginContainer
 @onready var diamond_surveillance_container: HBoxContainer = %DiamondSurveillanceContainer
 
 @onready var overload_level: TextureProgressBar = %OverloadLevel
+@onready var overload_combos: Label = $OuterContainer/OverloadBar/OverloadCombos
+
+var combo: int = 0
 
 @onready var container_lookup: Dictionary = {
 	PuzzleNode.IconType.CIRCLE: {
@@ -40,8 +43,13 @@ func _process(delta: float) -> void:
 
 func _handle_overload_activated(icon_type) -> void:
 	container_lookup[icon_type]["container"].modulate = Color.GRAY
+	combo += 1
+	overload_combos.text = "Combo: %d" % combo
 
 
 func _handle_overload_exhausted() -> void:
 	for icon_type in container_lookup:
 		container_lookup[icon_type]["container"].modulate = PuzzleNode.COLOR_LOOKUP[icon_type]["active"]
+	combo = -1
+	overload_combos.text = "Combo: 0"
+	

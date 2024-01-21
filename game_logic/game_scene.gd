@@ -2,18 +2,17 @@ class_name GameScene extends Node2D
 
 @onready var network: Network = $Network
 @onready var minigames: CanvasLayer = %Minigames
-@onready var surveillance_bars: CanvasLayer = $SurveillanceBars
 
 
 const MINIGAME_CONSTRUCTOR_SCENE = preload("res://game_logic/minigames/base_minigame/minigame_constructor.tscn")
 
 const MINIGAME_SPAWN_LOCATIONS: Array = [
-	Vector2i(1480 - 40, 360),
-	Vector2i(1440 - 40, 630),
+	Vector2i(1480 + 40, 360),
+	Vector2i(1440 + 40, 630),
 	Vector2i(120 + 40, 630),
-	Vector2i(80 + 40, 360),
+	Vector2i(80, 360),
 	Vector2i(120 + 40, 50),
-	Vector2i(1440 - 40, 50),
+	Vector2i(1440, 50),
 ]
 
 var minigame_lookup: Dictionary
@@ -32,20 +31,40 @@ func _ready() -> void:
 		
 		idx += 1
 
+
 func _spawn_minigame(minigame_id: int, minigame_spawn_location: Vector2i, icon_type: PuzzleNode.IconType) -> void:
 	var new_minigame: Node = MINIGAME_CONSTRUCTOR_SCENE.instantiate()
 	new_minigame.minigame_id = minigame_id
 	new_minigame.minigame_icon_type = icon_type
+	
+	var acceptable_minigames_lookup: Dictionary = {}
+	
+	for minigame in minigame_lookup.values():
+		if minigame == null:
+			continue
+		if minigame.minigame_type not in acceptable_minigames_lookup:
+			acceptable_minigames_lookup[minigame.minigame_type] = 0
+		acceptable_minigames_lookup[minigame.minigame_type] += 1
 
-	var minigame_choice = rng.randi() % MinigameData.MinigameType.size()
+	var acceptable_minigames: Array = []
+	for minigame in MinigameData.MinigameType.values():
+		if acceptable_minigames_lookup.get(minigame, 0) < 2:
+			acceptable_minigames.append(minigame)
+
+	var minigame_choice = acceptable_minigames.pick_random()
 	minigames.add_child(new_minigame)
 
 	new_minigame.create_minigame(minigame_choice)
+	
 	#new_minigame.create_minigame(MinigameData.MinigameType.ANAGRAM)
 	#new_minigame.create_minigame(MinigameData.MinigameType.ALPHABET)
 	#new_minigame.create_minigame(MinigameData.MinigameType.CAPITALS)
 	#new_minigame.create_minigame(MinigameData.MinigameType.HOLD_KEYS)
 	#new_minigame.create_minigame(MinigameData.MinigameType.HACK)
+	#new_minigame.create_minigame(MinigameData.MinigameType.ACRONYM)
+	#new_minigame.create_minigame(MinigameData.MinigameType.CONSONANTS)
+	#new_minigame.create_minigame(MinigameData.MinigameType.VOWELS)
+	#new_minigame.create_minigame(MinigameData.MinigameType.PROMPT)
 	new_minigame.deactivate_minigame()
 	new_minigame.global_position = minigame_spawn_location
 	new_minigame.minigame_base_location = minigame_spawn_location

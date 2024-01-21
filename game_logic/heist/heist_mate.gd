@@ -32,7 +32,7 @@ var packing_speed: float = 50.0
 var unloading_speed: float = 75.0
 
 const UNENCUMBERED_SPEED: float = 2000.0
-const ENCUMBERED_SPEED: float = 800.0
+const ENCUMBERED_SPEED: float = 1400.0
 
 var state: State = State.IDLE
 var last_state: State = State.IDLE
@@ -47,6 +47,7 @@ func _ready() -> void:
 	heist_nav.target_desired_distance = 2.0
 	
 	heistmate_speed = UNENCUMBERED_SPEED
+	GameControl.escape_activated.connect(_handle_escape_activated)
 
 
 func set_movement_target(target_pos: Vector2) -> void:
@@ -66,7 +67,7 @@ func _stop_action() -> void:
 func check_state(delta: float) -> void:
 	match state:
 		State.IDLE:
-			target_loot_object = heist_ref.get_loot_object()
+			target_loot_object = heist_ref.get_loot_object(self)
 			if target_loot_object == null:
 				set_movement_target(heist_ref.escape_area.global_position + Vector2(0, 20))
 				state = State.LEAVING
@@ -135,24 +136,29 @@ func check_state(delta: float) -> void:
 						state = State.EXTRACTING
 					else:
 						inventory.append(heist_ref.remove_from_pile())
-						action_progress.value = 0.0
+						_start_action()
 			else:
 				action_progress.value += pilfering_speed * delta
 				if action_progress.value >= 100.0:
 					heist_ref.add_to_pilfered(inventory.pop_back())
-					action_progress.value = 0.0
+					_start_action()
 		State.EXTRACTING:
 			queue_free()
 
 
 func _physics_process(delta: float) -> void:
 	check_state(delta)
-	#if last_state != state:
-		#print(State.keys()[state])
-		#last_state = state
+	if last_state != state:
+		print(State.keys()[state])
+		last_state = state
 
 
 func _move(delta: float) -> void:
 	next_path_position = heist_nav.get_next_path_position()
 	velocity = global_position.direction_to(next_path_position) * heistmate_speed * delta
 	move_and_slide()
+
+
+func _handle_escape_activated() -> void:
+	state = State.LEAVING
+	exiting_triggered = true

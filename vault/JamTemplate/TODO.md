@@ -1,33 +1,37 @@
 # Core
-- [ ] Create background image
-	- [ ] Computer screen
-	- [ ] Post-it tutorials
+- [x] Create background image
+	- [x] Computer screen
+	- [x] Post-it tutorials
 - [x] Create camera object
 	- [x] Make raycasts
 	- [x] Make polygon
-- [ ] Create heist-mates
+- [x] Create heist-mates
 	- [x] Make texture bar
 	- [x] Make navigation
 	- [x] Add inventory
 - [x] Add heist return logic
 - [x] Create objects to steal
-- [ ] Create autohack sequence
+- [x] Create autohack sequence
 - [ ] Create heist sequence (just navigation?)
 - [x] Link surveillance bars to camera
-- [ ] Start heist after practice
-- [ ] Create typing games
+- [x] Start heist after practice
+- [x] Create typing games
 	- [ ] Wordsearch
 	- [ ] Longest
 	- [ ] Shortest
-	- [ ] Prompt
-	- [ ] Acronym
-	- [ ] Fortune
-	- [ ] Vowels
-	- [ ] Consonants
-
+	- [x] Prompt
+	- [x] Acronym
+	- [x] Vowels
+	- [x] Consonants
+- [ ] Implement police minigame
+- [ ] Implement win screen
+- [ ] Implement restart
+- [ ] Implement post-its falling on click
 # Bugs
 - [ ] Hold/Hack minigames don't perform well
 - [ ] Add input pause after minigame active (0.5s)
+- [ ] Autohack not working
+	- [ ] Being thrown onto a node does not allow for autohack
 
 # Extra
 - [ ] Create "combo" effect for overload

@@ -11,6 +11,7 @@ var curr_index: int = 0
 
 var insert_indices: Array = []
 
+
 func _ready() -> void:
 	super._ready()
 	rng.randomize()

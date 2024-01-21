@@ -61,7 +61,6 @@ func _handle_player_str_updated(key_not_valid: bool, updated_minigame_id: int) -
 		emit_signal("bad_key", minigame_id)
 		player_str = player_str.substr(0, len(player_str) - 1)
 		return
-	
 
 	var bbcode_player_str = "> "
 	var idx = 0

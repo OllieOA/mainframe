@@ -1,12 +1,14 @@
-[gd_scene load_steps=24 format=3 uid="uid://b7molbvn5kuvf"]
+[gd_scene load_steps=27 format=3 uid="uid://b7molbvn5kuvf"]
 
 [ext_resource type="Texture2D" uid="uid://2oxuonwoy6ld" path="res://game_logic/heist/base_tilemap.png" id="1_kum1n"]
 [ext_resource type="Script" path="res://game_logic/heist/base_heist.gd" id="1_pynbl"]
+[ext_resource type="Theme" uid="uid://bnasyq22o0um3" path="res://game_logic/heist/application.tres" id="2_2mhm3"]
 [ext_resource type="PackedScene" uid="uid://cn80irhbwnub7" path="res://game_logic/heist/surveillance/surveillance_camera.tscn" id="2_xwf05"]
 [ext_resource type="PackedScene" uid="uid://drohhqrryxuc4" path="res://game_logic/heist/loot/base_loot.tscn" id="3_68ms1"]
-[ext_resource type="PackedScene" uid="uid://c2x4q2cuc081f" path="res://game_logic/heist/heist_mate.tscn" id="3_nfrln"]
 [ext_resource type="Theme" uid="uid://c501q1j77skrq" path="res://game_logic/minigames/base_minigame/minigame_theme.tres" id="6_fsqgu"]
 [ext_resource type="Texture2D" uid="uid://dkljt58nleydd" path="res://game_logic/heist/loot/loot_pile_sprite.svg" id="6_uw81f"]
+[ext_resource type="PackedScene" uid="uid://5xbyuedvcd7f" path="res://game_logic/heist/surveillance/surveillance_levels.tscn" id="9_2r62g"]
+[ext_resource type="PackedScene" uid="uid://dvvct81urvdw8" path="res://game_logic/heist/surveillance/police_level.tscn" id="10_u2tfa"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yx85w"]
 vertices = PackedVector2Array(12, -12, 12, 12, 6, 12, 6, -6, -12, -12, -12, -6)
@@ -54,6 +56,13 @@ agent_radius = 0.0
 vertices = PackedVector2Array(12, 12, -12, 12, -12, 6, 12, 6)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-12, 6, 12, 6, 12, 12, -12, 12)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3hrga"]
+vertices = PackedVector2Array(12, 12, -12, 12, -12, -12, 12, -12)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 0.0
 
@@ -173,6 +182,7 @@ texture_region_size = Vector2i(24, 24)
 1:3/0 = 0
 1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:3/0/physics_layer_0/angular_velocity = 0.0
+1:3/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_3hrga")
 
 [sub_resource type="TileSet" id="TileSet_h6f4h"]
 tile_size = Vector2i(24, 24)
@@ -191,9 +201,10 @@ script = ExtResource("1_pynbl")
 [node name="ProgramAreaMargin" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(750, 750)
 offset_left = -377.0
-offset_top = -367.0
+offset_top = -409.0
 offset_right = 373.0
-offset_bottom = 233.0
+offset_bottom = 585.0
+theme = ExtResource("2_2mhm3")
 
 [node name="HeistTiles" type="Node2D" parent="."]
 
@@ -206,12 +217,148 @@ layer_0/tile_data = PackedInt32Array(-131068, 65540, 3, -131067, 65540, 3, -6553
 [node name="LootObjects" type="Node2D" parent="."]
 
 [node name="BaseLoot" parent="LootObjects" instance=ExtResource("3_68ms1")]
-position = Vector2(25, -211)
+position = Vector2(-76.25, -232.5)
 price = 5000.0
 
+[node name="BaseLoot15" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-150, -66.25)
+price = 10000.0
+
+[node name="BaseLoot16" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-218.75, -141.25)
+price = 11000.0
+
+[node name="BaseLoot17" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-220, -105)
+price = 12000.0
+
+[node name="BaseLoot18" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(50, -82.5)
+price = 15000.0
+
+[node name="BaseLoot21" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(95, -82.5)
+price = 15000.0
+
+[node name="BaseLoot19" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(48.75, -7.50001)
+price = 16000.0
+
+[node name="BaseLoot20" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(93.75, -7.5)
+price = 16000.0
+
 [node name="BaseLoot2" parent="LootObjects" instance=ExtResource("3_68ms1")]
-position = Vector2(62, -231)
+position = Vector2(218.75, -237.5)
+price = 7000.0
+
+[node name="BaseLoot3" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(130, -238.75)
+price = 5000.0
+
+[node name="BaseLoot4" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(22.5, -237.5)
 price = 6000.0
+
+[node name="BaseLoot5" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-215, -22.5)
+price = 200000.0
+
+[node name="BaseLoot6" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-290, -21.25)
+price = 200000.0
+
+[node name="BaseLoot7" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-291.25, 41.25)
+price = 100000.0
+
+[node name="BaseLoot8" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-213.75, 40)
+price = 100000.0
+
+[node name="BaseLoot9" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-292.5, 170)
+price = 90000.0
+
+[node name="BaseLoot10" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-212.5, 168.75)
+price = 90000.0
+
+[node name="BaseLoot11" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-27.5, 267.5)
+price = 100000.0
+
+[node name="BaseLoot14" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(170, 311.25)
+price = 100000.0
+
+[node name="BaseLoot12" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-26.25, 307.5)
+price = 110000.0
+
+[node name="BaseLoot13" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(168.75, 266.25)
+price = 110000.0
+
+[node name="BaseLoot22" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-168.75, -17.5)
+price = 50000.0
+
+[node name="BaseLoot23" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-71.25, -18.75)
+price = 50000.0
+
+[node name="BaseLoot24" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-170, 38.75)
+price = 50000.0
+
+[node name="BaseLoot25" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-71.25, 37.5)
+price = 60000.0
+
+[node name="BaseLoot26" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-171.25, 106.25)
+price = 30000.0
+
+[node name="BaseLoot27" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(-1.52588e-05, 96.25)
+price = 30000.0
+
+[node name="BaseLoot28" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(170, 97.5)
+price = 30000.0
+
+[node name="BaseLoot29" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(213.75, -6.24999)
+price = 15000.0
+
+[node name="BaseLoot30" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(213.75, -43.75)
+price = 15000.0
+
+[node name="BaseLoot31" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(213.75, -82.5)
+price = 15000.0
+
+[node name="BaseLoot32" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(287.5, -82.5)
+price = 15000.0
+
+[node name="BaseLoot33" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(288.75, -42.5)
+price = 15000.0
+
+[node name="BaseLoot34" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(287.5, -5)
+price = 15000.0
+
+[node name="BaseLoot35" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(287.5, 121.25)
+price = 70000.0
+
+[node name="BaseLoot36" parent="LootObjects" instance=ExtResource("3_68ms1")]
+position = Vector2(72.5, 143.75)
+price = 100000.0
 
 [node name="EscapeArea" type="Area2D" parent="."]
 position = Vector2(71, -288)
@@ -224,9 +371,7 @@ texture = ExtResource("6_uw81f")
 hframes = 5
 
 [node name="HeistMates" type="Node2D" parent="."]
-
-[node name="HeistMate" parent="HeistMates" instance=ExtResource("3_nfrln")]
-position = Vector2(77, -290)
+position = Vector2(71.25, -287.5)
 
 [node name="SurveillanceCameras" type="Node2D" parent="."]
 
@@ -246,6 +391,46 @@ rotation_direction = -1
 [node name="SurveillanceCamera3" parent="SurveillanceCameras" instance=ExtResource("2_xwf05")]
 position = Vector2(175, 54)
 rotation = 3.92699
+camera_type = 0
+show_debug = false
+rotation_direction = 1
+
+[node name="SurveillanceCamera4" parent="SurveillanceCameras" instance=ExtResource("2_xwf05")]
+position = Vector2(210, 55)
+rotation = 5.49778
+show_debug = false
+rotation_direction = 1
+
+[node name="SurveillanceCamera5" parent="SurveillanceCameras" instance=ExtResource("2_xwf05")]
+position = Vector2(-295, 106.25)
+rotation = 5.49778
+camera_type = 2
+show_debug = false
+rotation_direction = 1
+
+[node name="SurveillanceCamera6" parent="SurveillanceCameras" instance=ExtResource("2_xwf05")]
+position = Vector2(-212.5, 106.25)
+rotation = 2.35619
+camera_type = 0
+show_debug = false
+rotation_direction = 1
+
+[node name="SurveillanceCamera7" parent="SurveillanceCameras" instance=ExtResource("2_xwf05")]
+position = Vector2(-222.5, -197.5)
+rotation = 0.785397
+show_debug = false
+rotation_direction = 1
+
+[node name="SurveillanceCamera8" parent="SurveillanceCameras" instance=ExtResource("2_xwf05")]
+position = Vector2(-120, -30)
+rotation = 1.57079
+camera_type = 2
+show_debug = false
+rotation_direction = 1
+
+[node name="SurveillanceCamera9" parent="SurveillanceCameras" instance=ExtResource("2_xwf05")]
+position = Vector2(70, 185)
+rotation = 1.57079
 camera_type = 0
 show_debug = false
 rotation_direction = 1
@@ -291,3 +476,59 @@ text = "$1,000,000"
 unique_name_in_owner = true
 layout_mode = 2
 text = "$1,000,000"
+
+[node name="SurveillanceLevels" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -21.25
+offset_bottom = -21.25
+
+[node name="SurveillanceLevels" parent="SurveillanceLevels" instance=ExtResource("9_2r62g")]
+layout_mode = 1
+offset_left = -153.75
+offset_top = 367.5
+offset_right = 220.25
+offset_bottom = 564.5
+
+[node name="PoliceLevel" parent="SurveillanceLevels" instance=ExtResource("10_u2tfa")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -162.5
+offset_top = 528.75
+offset_right = 153.5
+offset_bottom = 580.75
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="ProgramTitle" type="Label" parent="."]
+offset_left = -363.75
+offset_top = -402.5
+offset_right = -293.75
+offset_bottom = -379.5
+theme_override_font_sizes/font_size = 14
+text = "heist.exe"
+
+[node name="HeistPractice" type="PanelContainer" parent="."]
+offset_left = -267.5
+offset_top = -143.75
+offset_right = 276.5
+offset_bottom = 149.25
+theme = ExtResource("6_fsqgu")
+
+[node name="MarginContainer" type="MarginContainer" parent="HeistPractice"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="CalibrationLabel" type="Label" parent="HeistPractice/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Complete calibration
+to begin the heist:
+
+  0/5 Hacks Complete
+  0/1 Combos Activated"

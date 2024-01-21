@@ -4,8 +4,9 @@ signal network_node_activated(activated_node_id: int)
 signal network_node_deactivated(deactivated_node_id: int)
 
 const HEX_RADIUS := 480
-const HORIZ_OFFSET := Vector2i(100, 0)
+const HORIZ_OFFSET := Vector2i(110, 0)
 const SCREEN_OFFSET := Vector2i(0, -18)
+const COMPENSATION := Vector2i(80, 0)
 const PUZZLE_NODE = preload("res://game_logic/network/puzzle_node.tscn")
 
 @onready var move_allowed: AudioStreamPlayer = $MoveAllowed
@@ -78,8 +79,15 @@ func _populate_network() -> void:
 	var hex_points: Array = []
 	
 	for _i in range(6):
-		
 		var new_point = Vector2i(int(HEX_RADIUS * cos(curr_angle)), int(HEX_RADIUS * sin(curr_angle))) + screen_center + SCREEN_OFFSET
+		if new_point.x > screen_center.x:
+			new_point += HORIZ_OFFSET
+		else:
+			new_point -= HORIZ_OFFSET
+		if curr_angle == 0.0:
+			new_point -= COMPENSATION
+		elif curr_angle == PI:
+			new_point += COMPENSATION
 		hex_points.append(new_point)
 		curr_angle += 60 * PI/180
 	

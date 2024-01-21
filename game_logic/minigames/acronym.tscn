@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://d35sm123fd2l1"]
+
+[ext_resource type="PackedScene" uid="uid://cwva2be5l0yso" path="res://game_logic/minigames/base_minigame/minigame.tscn" id="1_gn4o1"]
+[ext_resource type="Script" path="res://game_logic/minigames/acronym.gd" id="2_imt27"]
+
+[node name="Acronym" instance=ExtResource("1_gn4o1")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("2_imt27")
+
+[node name="MinigameMargins" parent="." index="2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AcronymBox" type="VBoxContainer" parent="MinigameMargins" index="0"]
+layout_mode = 2
+
+[node name="AcronymPrompt" type="RichTextLabel" parent="MinigameMargins/AcronymBox" index="0"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "Prompt"
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="MinigameMargins/AcronymBox" index="1"]
+layout_mode = 2
+
+[node name="AcronymResponse" type="RichTextLabel" parent="MinigameMargins/AcronymBox" index="2"]
+clip_contents = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "Response"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

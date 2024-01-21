@@ -12,7 +12,7 @@ class_name SurveillanceCamera extends Node2D
 var base_rotation_rad: float
 var max_rotation_rad: float
 
-@export var rotation_speed: float = 10.0
+@export var rotation_speed: float = 1.0
 @export_range(-1, 1) var rotation_direction: int = 0
 
 @export_flags_2d_physics var collision_layer_mask: int = 0

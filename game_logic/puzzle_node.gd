@@ -37,8 +37,6 @@ const COLOR_LOOKUP: Dictionary = {
 	}
 }
 
-@onready var jiggle: Jiggle = $Jiggle
-
 var icon_type: IconType
 
 var node_base_coord: Vector2i
